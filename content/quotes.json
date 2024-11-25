@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "text": "The best time to plant a tree was 20 years ago. The second best time is now.",
+        "author": "Chinese Proverb",
+        "category": "motivation"
+    },
+    {
+        "id": 2,
+        "text": "Innovation distinguishes between a leader and a follower.",
+        "author": "Steve Jobs",
+        "category": "innovation"
+    }
+]
