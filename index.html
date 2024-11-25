@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Digital Digest</title>
+    <title>Remote Worker Daily</title>
     <style>
         :root {
-            --primary: #ffd700;
-            --bg-dark: #1a1a1a;
-            --bg-card: #2a2a2a;
+            --primary: #4A90E2;  /* Professional blue */
+            --secondary: #50E3C2; /* Fresh mint for accents */
+            --bg-dark: #1E1E2E;  /* Softer dark background */
+            --bg-card: #2A2A3A;  /* Slightly lighter card background */
             --text: #ffffff;
-            --text-muted: #cccccc;
+            --text-muted: #B8B8C0;
         }
 
         body {
-            font-family: monospace;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text);
             line-height: 1.6;
@@ -34,7 +35,7 @@
         }
 
         .date {
-            color: var(--primary);
+            color: var(--secondary);
             font-size: 1.2em;
             margin-bottom: 30px;
         }
@@ -44,12 +45,13 @@
             padding: 20px;
             margin-bottom: 30px;
             background-color: var(--bg-card);
-            border-radius: 0 8px 8px 0;
-            transition: transform 0.2s;
+            border-radius: 0 12px 12px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .section:hover {
             transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .section h2 {
@@ -58,40 +60,87 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.5em;
         }
 
-        .website {
+        .card {
             padding: 15px;
             margin-top: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .website a {
-            color: #4a9eff;
+        .tool-card {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .tool-content {
+            flex: 1;
+        }
+
+        .tool-content h3 {
+            margin: 0;
+            color: var(--secondary);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: rgba(74, 144, 226, 0.2);
+            color: var(--secondary);
+            font-size: 0.9em;
+            margin-right: 8px;
+            margin-top: 8px;
+        }
+
+        a {
+            color: var(--secondary);
             text-decoration: none;
-            font-weight: bold;
+            transition: color 0.2s;
         }
 
-        .website a:hover {
+        a:hover {
+            color: var(--primary);
             text-decoration: underline;
         }
 
-        .website p {
-            margin: 5px 0 0 0;
-            color: var(--text-muted);
+        .location-card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 15px;
         }
 
-        .source {
+        .location-image {
+            width: 120px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 8px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
             color: var(--text-muted);
             font-size: 0.9em;
-            margin-top: 10px;
         }
 
-        .icon {
-            width: 24px;
-            height: 24px;
-            fill: var(--primary);
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         footer {
@@ -106,63 +155,134 @@
 <body>
     <div class="container">
         <header>
-            <h1>Daily Digital Digest</h1>
+            <h1>Remote Worker Daily</h1>
             <div class="date" id="currentDate">Loading date...</div>
         </header>
 
-        <div class="section" id="factSection">
+        <div class="section">
             <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM11 7h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <path d="M9 9h6" />
+                    <path d="M9 12h6" />
+                    <path d="M9 15h4" />
                 </svg>
-                Today's Knowledge Nugget
+                Today's Remote Work Tip
             </h2>
-            <p id="dailyFact">Loading fact...</p>
-            <p class="source" id="factSource"></p>
+            <p id="dailyTip">Loading tip...</p>
         </div>
 
-        <div class="section" id="websiteSection">
+        <div class="section">
             <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path d="M12 8v4l3 3" />
                 </svg>
-                Daily Discoveries
+                Featured Productivity Tool
             </h2>
-            <div id="websiteList">Loading websites...</div>
+            <div id="toolCard" class="card tool-card">
+                <!-- Tool content will be loaded here -->
+            </div>
         </div>
 
-        <div class="section" id="quoteSection">
+        <div class="section">
             <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.74 4.485c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484zm5.484 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197l-.293-1.453c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484z"/>
+                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4" />
+                    <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
+                    <path d="M18 12H4" />
                 </svg>
-                Quote of the Day
+                Remote Job Opportunity
             </h2>
-            <p id="dailyQuote">Loading quote...</p>
+            <div id="jobCard" class="card">
+                <!-- Job content will be loaded here -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                Digital Nomad Destination
+            </h2>
+            <div id="locationCard" class="card location-card">
+                <!-- Location content will be loaded here -->
+            </div>
         </div>
 
         <footer>
-            <p>Come back tomorrow for fresh content!</p>
+            <p>Your daily guide to remote work success • Come back tomorrow for fresh insights!</p>
         </footer>
     </div>
 
     <script>
-        // Function to get content based on date
-        async function loadContent() {
-            try {
-                // Load all content files
-                const [facts, quotes, websites] = await Promise.all([
-                    fetch('content/facts.json').then(r => r.json()),
-                    fetch('content/quotes.json').then(r => r.json()),
-                    fetch('content/websites.json').then(r => r.json())
-                ]);
-
-                return { facts, quotes, websites };
-            } catch (error) {
-                console.error('Error loading content:', error);
-                return null;
-            }
-        }
+        // Sample content structure for remote work focus
+        const content = {
+            tips: [
+                {
+                    text: "Set up a dedicated workspace with good lighting to boost productivity",
+                    category: "workspace",
+                    source: "Remote Work Experts"
+                },
+                {
+                    text: "Use the Pomodoro Technique: 25 minutes of focused work followed by a 5-minute break",
+                    category: "productivity",
+                    source: "Time Management Institute"
+                }
+            ],
+            tools: [
+                {
+                    name: "Notion",
+                    description: "All-in-one workspace for notes, docs, and project management",
+                    url: "https://notion.so",
+                    tags: ["organization", "collaboration", "free-tier"],
+                    rating: 4.8
+                },
+                {
+                    name: "RescueTime",
+                    description: "Automatic time-tracking and productivity insights",
+                    url: "https://rescuetime.com",
+                    tags: ["productivity", "analytics", "premium"],
+                    rating: 4.6
+                }
+            ],
+            jobs: [
+                {
+                    title: "Remote Full Stack Developer",
+                    company: "TechCorp Inc.",
+                    salary: "$90,000 - $120,000",
+                    location: "Worldwide",
+                    tags: ["full-time", "healthcare", "401k"]
+                },
+                {
+                    title: "Content Marketing Manager",
+                    company: "Digital Brands Co.",
+                    salary: "$65,000 - $85,000",
+                    location: "Americas/Europe",
+                    tags: ["full-time", "flexible-hours"]
+                }
+            ],
+            locations: [
+                {
+                    city: "Chiang Mai",
+                    country: "Thailand",
+                    internetSpeed: "100Mbps",
+                    costOfLiving: "$800-1200/month",
+                    coworkingSpaces: 15,
+                    nomadScore: 4.8
+                },
+                {
+                    city: "Lisbon",
+                    country: "Portugal",
+                    internetSpeed: "150Mbps",
+                    costOfLiving: "$1500-2000/month",
+                    coworkingSpaces: 25,
+                    nomadScore: 4.7
+                }
+            ]
+        };
 
         // Get content for specific date
         function getContentForDate(content, date) {
@@ -174,9 +294,10 @@
             }
 
             return {
-                fact: content.facts[Math.abs(hash) % content.facts.length],
-                quote: content.quotes[Math.abs(hash >> 1) % content.quotes.length],
-                websites: content.websites.slice(0, 3) // Get first 3 websites
+                tip: content.tips[Math.abs(hash) % content.tips.length],
+                tool: content.tools[Math.abs(hash) % content.tools.length],
+                job: content.jobs[Math.abs(hash) % content.jobs.length],
+                location: content.locations[Math.abs(hash) % content.locations.length]
             };
         }
 
@@ -184,35 +305,48 @@
         function updatePage(content, date) {
             const dailyContent = getContentForDate(content, date);
 
-            // Update fact
-            document.getElementById('dailyFact').textContent = dailyContent.fact.text;
-            document.getElementById('factSource').textContent = `Source: ${dailyContent.fact.source}`;
+            // Update tip
+            document.getElementById('dailyTip').textContent = dailyContent.tip.text;
 
-            // Update quote
-            document.getElementById('dailyQuote').textContent = 
-                `"${dailyContent.quote.text}" - ${dailyContent.quote.author}`;
-
-            // Update websites
-            const websiteHTML = dailyContent.websites.map(site => `
-                <div class="website">
-                    <h3>${site.title}</h3>
-                    <a href="${site.url}" target="_blank" rel="noopener noreferrer">
-                        ${site.url}
-                    </a>
-                    <p>${site.description}</p>
+            // Update tool
+            document.getElementById('toolCard').innerHTML = `
+                <div class="tool-icon">T</div>
+                <div class="tool-content">
+                    <h3>${dailyContent.tool.name}</h3>
+                    <p>${dailyContent.tool.description}</p>
+                    <div>
+                        ${dailyContent.tool.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
                 </div>
-            `).join('');
-            
-            document.getElementById('websiteList').innerHTML = websiteHTML;
+            `;
+
+            // Update job
+            document.getElementById('jobCard').innerHTML = `
+                <h3>${dailyContent.job.title}</h3>
+                <p>${dailyContent.job.company}</p>
+                <p>${dailyContent.job.salary}</p>
+                <div>
+                    ${dailyContent.job.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            `;
+
+            // Update location
+            document.getElementById('locationCard').innerHTML = `
+                <div class="location-image"></div>
+                <div>
+                    <h3>${dailyContent.location.city}, ${dailyContent.location.country}</h3>
+                    <div class="stats">
+                        <span class="stat">📡 ${dailyContent.location.internetSpeed}</span>
+                        <span class="stat">💰 ${dailyContent.location.costOfLiving}</span>
+                        <span class="stat">⭐ ${dailyContent.location.nomadScore}</span>
+                    </div>
+                </div>
+            `;
         }
 
         // Initialize everything
-        async function init() {
+        function init() {
             const date = new Date();
-            const content = await loadContent();
-            if (content) {
-                updatePage(content, date);
-            }
             
             // Update date display
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -221,6 +355,9 @@
             
             const dateString = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
             document.getElementById('currentDate').textContent = dateString;
+
+            // Update content
+            updatePage(content, date);
         }
 
         // Start the app
