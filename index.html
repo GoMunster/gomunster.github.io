@@ -5,96 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Digital Digest</title>
     <style>
-        :root {
-            --primary: #ffd700;
-            --bg-dark: #1a1a1a;
-            --bg-card: #2a2a2a;
-            --text: #ffffff;
-            --text-muted: #cccccc;
-        }
-
-        body {
-            font-family: monospace;
-            background-color: var(--bg-dark);
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .date {
-            color: var(--primary);
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-
-        .section {
-            border-left: 4px solid var(--primary);
-            padding: 20px;
-            margin-bottom: 30px;
-            background-color: var(--bg-card);
-            border-radius: 0 8px 8px 0;
-            transition: transform 0.2s;
-        }
-
-        .section:hover {
-            transform: translateX(5px);
-        }
-
-        .section h2 {
-            color: var(--primary);
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .website {
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .website a {
-            color: #4a9eff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .website a:hover {
-            text-decoration: underline;
-        }
-
-        .website p {
-            margin: 5px 0 0 0;
-            color: var(--text-muted);
-        }
-
-        .icon {
-            width: 24px;
-            height: 24px;
-            fill: var(--primary);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--bg-card);
-            color: var(--text-muted);
-        }
+        /* Keep your existing styles */
     </style>
 </head>
 <body>
@@ -105,122 +16,75 @@
         </header>
 
         <div class="section" id="factSection">
-            <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM11 7h2v2h-2V7zm0 4h2v6h-2v-6z"/>
-                </svg>
-                Today's Knowledge Nugget
-            </h2>
+            <h2>Today's Knowledge Nugget</h2>
             <p id="dailyFact">Loading fact...</p>
+            <small id="factSource"></small>
         </div>
 
         <div class="section" id="websiteSection">
-            <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                </svg>
-                Daily Discoveries
-            </h2>
+            <h2>Daily Discoveries</h2>
             <div id="websiteList">Loading websites...</div>
         </div>
 
         <div class="section" id="quoteSection">
-            <h2>
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.74 4.485c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484zm5.484 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197l-.293-1.453c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484z"/>
-                </svg>
-                Quote of the Day
-            </h2>
+            <h2>Quote of the Day</h2>
             <p id="dailyQuote">Loading quote...</p>
         </div>
-
-        <footer>
-            <p>Come back tomorrow for fresh content!</p>
-        </footer>
     </div>
 
     <script>
-        // Content Database
-        const content = {
-            facts: [
-                "The first computer mouse was made of wood",
-                "The first website is still online at info.cern.ch",
-                "The word 'robot' comes from the Czech word for 'forced labor'",
-                "The first computer virus was created in 1983",
-                "The first computer programmer was Ada Lovelace",
-                "The first tweet was sent on March 21, 2006"
-            ],
-            quotes: [
-                "The best time to plant a tree was 20 years ago. The second best time is now.",
-                "Everything you've ever wanted is sitting on the other side of fear.",
-                "The only way to do great work is to love what you do.",
-                "Innovation distinguishes between a leader and a follower.",
-                "The future belongs to those who believe in the beauty of their dreams.",
-                "Success is not final, failure is not fatal: it is the courage to continue that counts."
-            ],
-            websites: [
-                {
-                    category: "Productivity",
-                    url: "https://todoist.com",
-                    description: "Smart task management and scheduling"
-                },
-                {
-                    category: "Learning",
-                    url: "https://freecodecamp.org",
-                    description: "Learn to code for free"
-                },
-                {
-                    category: "Tools",
-                    url: "https://notion.so",
-                    description: "All-in-one workspace for notes and planning"
-                },
-                {
-                    category: "Development",
-                    url: "https://github.com",
-                    description: "Code hosting and collaboration platform"
-                }
-            ]
-        };
+        // Function to get content based on date
+        async function loadContent() {
+            try {
+                // Load all content files
+                const [facts, quotes, websites] = await Promise.all([
+                    fetch('content/facts.json').then(r => r.json()),
+                    fetch('content/quotes.json').then(r => r.json()),
+                    fetch('content/websites.json').then(r => r.json())
+                ]);
 
-        // Get deterministic but seemingly random index for a given date
-        function getDateIndex(date, arrayLength) {
+                return { facts, quotes, websites };
+            } catch (error) {
+                console.error('Error loading content:', error);
+                return null;
+            }
+        }
+
+        // Get content for specific date
+        function getContentForDate(content, date) {
             const dateString = date.toISOString().split('T')[0];
             let hash = 0;
             for (let i = 0; i < dateString.length; i++) {
                 hash = ((hash << 5) - hash) + dateString.charCodeAt(i);
                 hash = hash & hash;
             }
-            return Math.abs(hash) % arrayLength;
+
+            return {
+                fact: content.facts[Math.abs(hash) % content.facts.length],
+                quote: content.quotes[Math.abs(hash >> 1) % content.quotes.length],
+                websites: content.websites.slice(0, 3) // Get first 3 websites
+            };
         }
 
-        // Update date display
-        function updateDate() {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
-                          'August', 'September', 'October', 'November', 'December'];
-            
-            const now = new Date();
-            const dateString = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-            
-            document.getElementById('currentDate').textContent = dateString;
-            return now;
-        }
+        // Update the page content
+        function updatePage(content, date) {
+            const dailyContent = getContentForDate(content, date);
 
-        // Update daily content
-        function updateContent(date) {
             // Update fact
-            const factIndex = getDateIndex(date, content.facts.length);
-            document.getElementById('dailyFact').textContent = content.facts[factIndex];
+            document.getElementById('dailyFact').textContent = dailyContent.fact.text;
+            document.getElementById('factSource').textContent = `Source: ${dailyContent.fact.source}`;
 
             // Update quote
-            const quoteIndex = getDateIndex(date, content.quotes.length);
-            document.getElementById('dailyQuote').textContent = content.quotes[quoteIndex];
+            document.getElementById('dailyQuote').textContent = 
+                `"${dailyContent.quote.text}" - ${dailyContent.quote.author}`;
 
             // Update websites
-            const websiteHTML = content.websites.map(site => `
+            const websiteHTML = dailyContent.websites.map(site => `
                 <div class="website">
-                    <h3>${site.category}</h3>
-                    <a href="${site.url}" target="_blank" rel="noopener noreferrer">${site.url}</a>
+                    <h3>${site.title}</h3>
+                    <a href="${site.url}" target="_blank" rel="noopener noreferrer">
+                        ${site.url}
+                    </a>
                     <p>${site.description}</p>
                 </div>
             `).join('');
@@ -228,9 +92,28 @@
             document.getElementById('websiteList').innerHTML = websiteHTML;
         }
 
-        // Initialize page
-        const currentDate = updateDate();
-        updateContent(currentDate);
+        // Initialize everything
+        async function init() {
+            const date = new Date();
+            const content = await loadContent();
+            if (content) {
+                updatePage(content, date);
+            }
+            
+            // Update date display
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
+                          'August', 'September', 'October', 'November', 'December'];
+            
+            const dateString = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+            document.getElementById('currentDate').textContent = dateString;
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
