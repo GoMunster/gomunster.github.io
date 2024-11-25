@@ -5,7 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Digital Digest</title>
     <style>
-        /* Keep your existing styles */
+        :root {
+            --primary: #ffd700;
+            --bg-dark: #1a1a1a;
+            --bg-card: #2a2a2a;
+            --text: #ffffff;
+            --text-muted: #cccccc;
+        }
+
+        body {
+            font-family: monospace;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .date {
+            color: var(--primary);
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: var(--bg-card);
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.2s;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .website {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .website a {
+            color: #4a9eff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .website a:hover {
+            text-decoration: underline;
+        }
+
+        .website p {
+            margin: 5px 0 0 0;
+            color: var(--text-muted);
+        }
+
+        .source {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bg-card);
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -16,20 +111,39 @@
         </header>
 
         <div class="section" id="factSection">
-            <h2>Today's Knowledge Nugget</h2>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM11 7h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+                </svg>
+                Today's Knowledge Nugget
+            </h2>
             <p id="dailyFact">Loading fact...</p>
-            <small id="factSource"></small>
+            <p class="source" id="factSource"></p>
         </div>
 
         <div class="section" id="websiteSection">
-            <h2>Daily Discoveries</h2>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                Daily Discoveries
+            </h2>
             <div id="websiteList">Loading websites...</div>
         </div>
 
         <div class="section" id="quoteSection">
-            <h2>Quote of the Day</h2>
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.74 4.485c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484zm5.484 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197l-.293-1.453c0 0-.218.052-.597.144-.377.088-.727.188-1.148.319-.42.131-.772.264-1.166.476-.391.212-.789.607-1.239.908-.424.329-.813.646-1.136 1.035-.325.39-.726.946-.922 1.429-.196.476-.363.984-.363 1.472 0 .937.549 1.721 1.028 2.206.476.484 1.084.771 1.708.771 1.371 0 2.484-1.113 2.484-2.484 0-1.371-1.113-2.484-2.484-2.484z"/>
+                </svg>
+                Quote of the Day
+            </h2>
             <p id="dailyQuote">Loading quote...</p>
         </div>
+
+        <footer>
+            <p>Come back tomorrow for fresh content!</p>
+        </footer>
     </div>
 
     <script>
@@ -111,9 +225,6 @@
 
         // Start the app
         init();
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
