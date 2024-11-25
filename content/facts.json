@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "text": "The first computer mouse was made of wood",
+        "category": "tech",
+        "source": "Computer History Museum"
+    },
+    {
+        "id": 2,
+        "text": "Honey never spoils. Archaeologists found 3,000-year-old honey in Egyptian tombs",
+        "category": "science",
+        "source": "National Geographic"
+    }
+]
