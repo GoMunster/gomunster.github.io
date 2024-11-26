@@ -3,222 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GO FUCKING REMOTE</title>
+    <title>The Nomad Daily - Your Digital Nomad Resource</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Custom Styles */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f4f4f4;
-            color: #333;
-        }
-
-        header {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-        }
-
-        .date {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        section {
-            background: white;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #1a1a1a;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .job-card {
-            border: 1px solid #eee;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            transition: transform 0.2s;
-            background: #fafafa;
+            background-color: #0f172a;
+            color: #f1f5f9;
         }
         
-        .job-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .section-card {
+            background-color: #1e293b;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
         }
         
-        .job-title {
-            font-size: 1.4em;
-            color: #007bff;
-            margin-bottom: 10px;
+        .highlight-text {
+            color: #2dd4bf;
         }
         
-        .company-name {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
+        .card-hover:hover {
+            background-color: #334155;
+            transition: background-color 0.2s;
         }
         
-        .company-details {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .company-website {
-            color: #007bff;
-            text-decoration: none;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-        
-        .company-website:hover {
-            text-decoration: underline;
-        }
-        
-        .job-description {
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-        
-        .job-salary {
-            font-weight: 600;
-            color: #28a745;
-            margin: 10px 0;
-        }
-        
-        .apply-button {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #007bff;
+        .btn-primary {
+            background-color: #0d9488;
             color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s;
-            margin-top: 10px;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .apply-button:hover {
-            background: #0056b3;
+        .btn-primary:hover {
+            background-color: #0f766e;
         }
-
-        .affiliate-card {
-            background: #fff9e6;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: 1px solid #ffe0b2;
-        }
-
-        .affiliate-card h3 {
-            color: #e65100;
-            margin-bottom: 10px;
-        }
-
-        .affiliate-card a {
+        
+        .tag {
+            background-color: #334155;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             display: inline-block;
-            padding: 8px 16px;
-            background: #ff9800;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s;
-            margin-top: 10px;
-        }
-
-        .affiliate-card a:hover {
-            background: #f57c00;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
-            section {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
+            margin: 0.25rem;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>GO FUCKING REMOTE</h1>
-        <div class="date" id="current-date"></div>
-    </header>
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold highlight-text mb-2">The Nomad Daily</h1>
+            <p class="text-xl text-gray-400" id="current-date"></p>
+        </header>
 
-    <main>
-        <section>
-            <h2>🔥 TODAY'S REMOTE FUCKING JOBS</h2>
-            <div id="daily-jobs">
-                Loading awesome remote jobs...
+        <!-- Quote Section -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="compass" class="inline mr-2"></i>
+                Wanderlust Quote of the Day
+            </h2>
+            <blockquote class="text-xl italic">
+                "Life is either a daring adventure or nothing at all." - Helen Keller
+            </blockquote>
+        </section>
+
+        <!-- Digital Nomad Intel -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="globe" class="inline mr-2"></i>
+                Digital Nomad Intel
+            </h2>
+            <h3 class="text-lg font-medium mb-2">Today's Topic: Portugal D7 Visa</h3>
+            <p>Did you know Portugal's D7 visa lets you live and work remotely while enjoying Mediterranean life? 
+               Minimum income requirement: €760/month. Perfect for freelancers and remote workers!</p>
+        </section>
+
+        <!-- Remote Job Radar -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="briefcase" class="inline mr-2"></i>
+                Remote Job Radar
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Job Board Links -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium mb-2">Top Job Boards</h3>
+                    <!-- Add job board items here -->
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2>💻 ESSENTIAL DIGITAL NOMAD SHIT</h2>
-            <div class="affiliate-card">
-                <h3>🌐 Get a Fucking VPN</h3>
-                <p>Don't be an idiot. Protect your shit when using sketchy coffee shop WiFi.</p>
-                <a href="YOUR_NORDVPN_AFFILIATE_LINK" target="_blank" rel="noopener noreferrer">
-                    Get NordVPN with 68% off →
-                </a>
-            </div>
-
-            <div class="affiliate-card">
-                <h3>💳 Wise: Don't Get Fucked by Bank Fees</h3>
-                <p>Get paid in multiple currencies without the bullshit fees.</p>
-                <a href="YOUR_WISE_AFFILIATE_LINK" target="_blank" rel="noopener noreferrer">
-                    Open a free Wise account →
-                </a>
-            </div>
+        <!-- Digital Marketing Daily -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="lightbulb" class="inline mr-2"></i>
+                Digital Marketing Daily
+            </h2>
+            <!-- Add marketing content here -->
         </section>
 
-        <section>
-            <h2>🏝️ NOMAD WISDOM OF THE DAY</h2>
-            <p id="daily-quote">Loading wisdom...</p>
+        <!-- Daily Listen -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="headphones" class="inline mr-2"></i>
+                Daily Listen
+            </h2>
+            <!-- Add podcast content here -->
         </section>
-    </main>
 
-    <footer>
-        <p>Built with ☕ by a fucking remote worker</p>
-        <p><small>Jobs data from We Work Remotely</small></p>
-    </footer>
+        <!-- Nomad Self-Care Corner -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="heart" class="inline mr-2"></i>
+                Nomad Self-Care Corner
+            </h2>
+            <!-- Add self-care content here -->
+        </section>
+
+        <!-- Community Spotlight -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="users" class="inline mr-2"></i>
+                Community Spotlight
+            </h2>
+            <!-- Add community content here -->
+        </section>
+
+        <!-- Daily Skill Builder -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="graduation-cap" class="inline mr-2"></i>
+                Daily Skill Builder
+            </h2>
+            <!-- Add skill building content here -->
+        </section>
+
+        <!-- Nomad Toolbox -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold highlight-text mb-4">
+                <i data-lucide="wrench" class="inline mr-2"></i>
+                Nomad Toolbox
+            </h2>
+            <!-- Add tools content here -->
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-700">
+            <div class="flex justify-between items-center">
+                <button class="text-gray-400 hover:text-teal-400 transition-colors">
+                    ← Yesterday's Post
+                </button>
+                <i data-lucide="bookmark" class="text-teal-400 cursor-pointer hover:text-teal-300"></i>
+                <button class="text-gray-400 hover:text-teal-400 transition-colors">
+                    Archive →
+                </button>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        // Update current date
+        // Set current date
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
@@ -226,101 +179,8 @@
             day: 'numeric'
         });
 
-        // Fetch and display jobs
-        async function fetchAndDisplayJobs() {
-            const WWR_FEED = 'https://weworkremotely.com/categories/remote-programming-jobs.rss';
-            
-            try {
-                const response = await fetch(WWR_FEED);
-                const text = await response.text();
-                
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(text, 'text/xml');
-                const items = xmlDoc.getElementsByTagName('item');
-                
-                const jobsArray = Array.from(items).map(item => {
-                    const description = item.querySelector('description')?.textContent;
-                    const descriptionDoc = parser.parseFromString(description, 'text/html');
-                    
-                    // Parse the description HTML to extract more details
-                    const parseDescription = (desc) => {
-                        const div = document.createElement('div');
-                        div.innerHTML = desc;
-                        
-                        // Extract salary if it exists
-                        const salaryMatch = desc.match(/\$[\d,]+ ?- ?\$[\d,]+|\$[\d,]+/);
-                        const salary = salaryMatch ? salaryMatch[0] : null;
-                        
-                        // Extract company website if it exists
-                        const websiteLink = div.querySelector('a[href*="//"]')?.href;
-                        
-                        // Extract headquarters
-                        const hqMatch = desc.match(/Headquarters:\s*([^<\n]+)/);
-                        const headquarters = hqMatch ? hqMatch[1].trim() : null;
-                        
-                        // Clean description text
-                        const cleanDesc = desc
-                            .replace(/<[^>]+>/g, '') // Remove HTML tags
-                            .replace(/\s+/g, ' ') // Normalize whitespace
-                            .replace(/→.*$/, '') // Remove everything after arrow
-                            .trim()
-                            .substring(0, 300) + '...';
-                        
-                        return { salary, websiteLink, headquarters, cleanDesc };
-                    };
-                    
-                    const { salary, websiteLink, headquarters, cleanDesc } = parseDescription(description);
-                    
-                    return {
-                        title: item.querySelector('title')?.textContent,
-                        link: item.querySelector('link')?.textContent,
-                        company: description.split(' at ')[1]?.split('<')[0],
-                        description: cleanDesc,
-                        salary,
-                        website: websiteLink,
-                        headquarters
-                    };
-                });
-                
-                const shuffledJobs = jobsArray.sort(() => 0.5 - Math.random()).slice(0, 3);
-                
-                const jobsContainer = document.getElementById('daily-jobs');
-                jobsContainer.innerHTML = shuffledJobs.map(job => `
-                    <div class="job-card">
-                        <h3 class="job-title">${job.title}</h3>
-                        <p class="company-name">${job.company}</p>
-                        ${job.headquarters ? `<p class="company-details">🌍 ${job.headquarters}</p>` : ''}
-                        ${job.website ? `<a href="${job.website}" class="company-website" target="_blank" rel="noopener noreferrer">🔗 Company Website</a>` : ''}
-                        <p class="job-description">${job.description}</p>
-                        ${job.salary ? `<p class="job-salary">💰 ${job.salary}</p>` : ''}
-                        <a href="${job.link}" class="apply-button" target="_blank" rel="noopener noreferrer">
-                            Apply Now →
-                        </a>
-                    </div>
-                `).join('');
-                
-            } catch (error) {
-                console.error('Error fetching jobs:', error);
-                document.getElementById('daily-jobs').innerHTML = 
-                    '<p>Failed to load jobs. Please check back later.</p>';
-            }
-        }
-
-        // Array of nomad quotes
-        const quotes = [
-            "The office is where dreams go to die. Work from anywhere.",
-            "Your best life doesn't happen in a cubicle.",
-            "The world is your fucking office. Act like it.",
-            "Life's too short for commutes and fluorescent lights.",
-            "Working remotely isn't about avoiding work, it's about choosing where to crush it."
-        ];
-
-        // Display random quote
-        document.getElementById('daily-quote').textContent = 
-            quotes[Math.floor(Math.random() * quotes.length)];
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayJobs);
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
