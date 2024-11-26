@@ -3,391 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Daily Remote Work Guide | GoMunster</title>
-    <meta name="description" content="Daily tips, tools, and wisdom for remote workers and digital nomads.">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter/3.19.3/inter.min.css" rel="stylesheet">
-
-    <!-- Open Graph tags for better social sharing -->
-    <meta property="og:title" content="Daily Remote Work Guide | GoMunster">
-    <meta property="og:description" content="Daily tips, tools, and wisdom for remote workers and digital nomads.">
-    <meta property="og:url" content="https://gomunster.github.io">
-
+    <title>GO FUCKING REMOTE</title>
     <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --text-color: #e0e0e0;
-            --accent-color: #00ff88;
-            --secondary-accent: #00ccff;
-            --section-bg: #121212;
-            --border-color: #1a1a1a;
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 20px;
+            background: #f4f4f4;
+            color: #333;
         }
 
+        /* Header styles */
         header {
             text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .logo {
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .date {
-            color: #888;
-            font-style: italic;
-            margin: 1rem 0;
-            text-align: center;
+            margin: 40px 0;
         }
 
         h1 {
-            color: var(--accent-color);
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 1.5rem 0;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #1a1a1a;
         }
 
-        .section {
-            background: var(--section-bg);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .date {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
         }
 
-        .section:hover {
+        /* Section styles */
+        section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Job card styles */
+        .job-card {
+            border: 1px solid #eee;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            background: #fafafa;
+        }
+        
+        .job-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
-        .section h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        
+        .company {
+            color: #666;
+            font-size: 0.9em;
         }
-
-        .highlight {
-            background: #1a1a1a;
-            padding: 1.25rem;
-            border-left: 4px solid var(--accent-color);
-            margin: 1rem 0;
-            border-radius: 0 8px 8px 0;
+        
+        .description {
+            margin: 10px 0;
         }
-
-        .tool-box {
-            background: #1a1a1a;
-            padding: 1.25rem;
-            border-left: 4px solid var(--secondary-accent);
-            border-radius: 0 8px 8px 0;
-        }
-
-        .tool-box strong {
-            color: var(--secondary-accent);
-        }
-
-        a {
-            color: var(--secondary-accent);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--accent-color);
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .stat {
-            background: #1a1a1a;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-number {
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: #888;
-            margin-top: 0.25rem;
-        }
-
-        footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: #888;
-        }
-
-        .subscribe-button {
+        
+        .job-card a {
             display: inline-block;
-            background: var(--accent-color);
-            color: var(--bg-color);
-            padding: 0.75rem 1.5rem;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .job-card a:hover {
+            background: #0056b3;
+        }
+
+        /* Affiliate section styles */
+        .affiliate-card {
+            background: #fff9e6;
+            padding: 20px;
+            margin-bottom: 20px;
             border-radius: 8px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: transform 0.2s ease;
+            border: 1px solid #ffe0b2;
         }
 
-        .subscribe-button:hover {
-            color: var(--bg-color);
-            transform: translateY(-1px);
+        .affiliate-card h3 {
+            color: #e65100;
+            margin-bottom: 10px;
         }
 
+        /* Footer styles */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Responsive design */
         @media (max-width: 600px) {
             body {
-                padding: 15px;
+                padding: 10px;
+            }
+
+            section {
+                padding: 20px;
             }
 
             h1 {
-                font-size: 1.5rem;
-            }
-
-            .section {
-                padding: 1rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr 1fr;
+                font-size: 2em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="/" class="logo">GoMunster</a>
-        </header>
+    <header>
+        <h1>GO FUCKING REMOTE</h1>
+        <div class="date" id="current-date"></div>
+    </header>
 
-        <div class="date" id="currentDate"></div>
-        
-        <h1>🌍 LEVEL UP YOUR REMOTE LIFE</h1>
-        
-        <div class="section">
-            <h2>🎯 TODAY'S POWER MOVE</h2>
-            <div class="highlight" id="dailyTip"></div>
-        </div>
-        
-        <div class="section">
-            <h2>💻 TOOL OF THE DAY</h2>
-            <div class="tool-box" id="dailyTool"></div>
-        </div>
-        
-        <div class="section">
-            <h2>📊 REMOTE WORK REALITY CHECK</h2>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">32%</div>
-                    <div class="stat-label">Global Remote Jobs</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">$4.2K</div>
-                    <div class="stat-label">Avg Monthly Income</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">47%</div>
-                    <div class="stat-label">Cost Savings</div>
-                </div>
+    <main>
+        <section>
+            <h2>🔥 TODAY'S REMOTE FUCKING JOBS</h2>
+            <div id="daily-jobs">
+                Loading awesome remote jobs...
             </div>
-        </div>
-        
-        <div class="section">
-            <h2>🌴 NOMAD CITY SPOTLIGHT</h2>
-            <div id="dailyCity"></div>
-        </div>
-        
-        <div class="section">
-            <h2>💡 REMOTE WORK WISDOM</h2>
-            <div class="highlight" id="dailyWisdom"></div>
-        </div>
-        
-        <footer>
-            <p>
-                Built from somewhere in the world 🌍
-                <br>
-                <a href="#" class="subscribe-button" id="subscribe">Get daily remote work wisdom →</a>
-            </p>
-        </footer>
-    </div>
+        </section>
+
+        <section>
+            <h2>💻 ESSENTIAL DIGITAL NOMAD SHIT</h2>
+            <div class="affiliate-card">
+                <h3>🌐 Get a Fucking VPN</h3>
+                <p>Don't be an idiot. Protect your shit when using sketchy coffee shop WiFi.</p>
+                <a href="YOUR_NORDVPN_AFFILIATE_LINK" target="_blank" rel="noopener noreferrer">
+                    Get NordVPN with 68% off →
+                </a>
+            </div>
+
+            <div class="affiliate-card">
+                <h3>💳 Wise: Don't Get Fucked by Bank Fees</h3>
+                <p>Get paid in multiple currencies without the bullshit fees.</p>
+                <a href="YOUR_WISE_AFFILIATE_LINK" target="_blank" rel="noopener noreferrer">
+                    Open a free Wise account →
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>🏝️ NOMAD WISDOM OF THE DAY</h2>
+            <p id="daily-quote">Loading wisdom...</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built with ☕ by a fucking remote worker</p>
+        <p><small>Jobs data from We Work Remotely</small></p>
+    </footer>
 
     <script>
-        // Content Database
-        const content = {
-            tips: [
-                {
-                    content: "Master asynchronous communication. Your ability to work across time zones is your superpower. Start by documenting everything and making your work visible to your team."
-                },
-                {
-                    content: "Create a dedicated workspace that energizes you. Your environment shapes your productivity and mental state."
-                },
-                {
-                    content: "Set clear boundaries between work and life. Remote work shouldn't mean always being available."
-                },
-                {
-                    content: "Build your personal brand online. It's your remote work insurance policy and opportunity magnet."
-                },
-                {
-                    content: "Invest in your home office setup. A good chair and proper monitor height will save you thousands in medical bills."
-                }
-            ],
-            tools: [
-                {
-                    name: "Notion",
-                    description: "Your second brain for remote work. Organize your entire work life in one place.",
-                    link: "#",
-                    promoText: "Get 2 months free with this link →"
-                },
-                {
-                    name: "Fellow.app",
-                    description: "Make your meetings actually productive. Perfect for remote teams.",
-                    link: "#",
-                    promoText: "Try it free for 30 days →"
-                },
-                {
-                    name: "Loom",
-                    description: "Show, don't tell. Record quick videos to explain complex ideas asynchronously.",
-                    link: "#",
-                    promoText: "Start recording for free →"
-                }
-            ],
-            cities: [
-                {
-                    name: "Medellin, Colombia",
-                    details: [
-                        "Monthly Cost: $1,200 (living well)",
-                        "Internet: 50Mbps average",
-                        "Coworking: $100/month",
-                        "Visa: 90 days on arrival",
-                        "Nomad Community: Thriving"
-                    ]
-                },
-                {
-                    name: "Chiang Mai, Thailand",
-                    details: [
-                        "Monthly Cost: $800 (comfortable)",
-                        "Internet: 100Mbps fiber",
-                        "Coworking: $80/month",
-                        "Visa: 60 days + extensions",
-                        "Nomad Community: Extensive"
-                    ]
-                },
-                {
-                    name: "Lisbon, Portugal",
-                    details: [
-                        "Monthly Cost: $2,000 (decent)",
-                        "Internet: 500Mbps fiber",
-                        "Coworking: $150/month",
-                        "Visa: D7 visa friendly",
-                        "Nomad Community: Growing"
-                    ]
-                }
-            ],
-            wisdom: [
-                {
-                    quote: "Your productivity is not measured by your time online, but by your output."
-                },
-                {
-                    quote: "The best remote workers aren't the ones who work the most hours, but those who communicate the clearest."
-                },
-                {
-                    quote: "Remote work is not about working from home, it's about working from anywhere you perform best."
-                }
-            ]
-        };
-
-        // Function to get random content
-        function getRandomContent(array) {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-
-        // Update date
-        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
+        // Update current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
 
-        // Update daily content
-        document.getElementById('dailyTip').textContent = getRandomContent(content.tips).content;
+        // Fetch and display jobs
+        async function fetchAndDisplayJobs() {
+            const WWR_FEED = 'https://weworkremotely.com/categories/remote-programming-jobs.rss';
+            
+            try {
+                const response = await fetch(WWR_FEED);
+                const text = await response.text();
+                
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(text, 'text/xml');
+                const items = xmlDoc.getElementsByTagName('item');
+                
+                const jobsArray = Array.from(items).map(item => ({
+                    title: item.querySelector('title')?.textContent,
+                    link: item.querySelector('link')?.textContent,
+                    company: item.querySelector('description')?.textContent.split(' at ')[1]?.split('<')[0],
+                    description: item.querySelector('description')?.textContent
+                        .replace(/<\/?[^>]+(>|$)/g, '')
+                        .substring(0, 150) + '...'
+                }));
+                
+                const shuffledJobs = jobsArray.sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                const jobsContainer = document.getElementById('daily-jobs');
+                jobsContainer.innerHTML = shuffledJobs.map(job => `
+                    <div class="job-card">
+                        <h3>${job.title}</h3>
+                        <p class="company">${job.company}</p>
+                        <p class="description">${job.description}</p>
+                        <a href="${job.link}" target="_blank" rel="noopener noreferrer">
+                            Apply Now →
+                        </a>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error fetching jobs:', error);
+                document.getElementById('daily-jobs').innerHTML = 
+                    '<p>Failed to load jobs. Please check back later.</p>';
+            }
+        }
 
-        const tool = getRandomContent(content.tools);
-        document.getElementById('dailyTool').innerHTML = `
-            <strong>${tool.name}</strong> - ${tool.description}
-            <br><br>
-            <a href="${tool.link}" target="_blank">${tool.promoText}</a>
-        `;
+        // Array of nomad quotes
+        const quotes = [
+            "The office is where dreams go to die. Work from anywhere.",
+            "Your best life doesn't happen in a cubicle.",
+            "The world is your fucking office. Act like it.",
+            "Life's too short for commutes and fluorescent lights.",
+            "Working remotely isn't about avoiding work, it's about choosing where to crush it."
+        ];
 
-        const city = getRandomContent(content.cities);
-        document.getElementById('dailyCity').innerHTML = `
-            <p>${city.name}</p>
-            <ul>
-                ${city.details.map(detail => `<li>${detail}</li>`).join('')}
-            </ul>
-        `;
+        // Display random quote
+        document.getElementById('daily-quote').textContent = 
+            quotes[Math.floor(Math.random() * quotes.length)];
 
-        document.getElementById('dailyWisdom').textContent = getRandomContent(content.wisdom).quote;
-
-        // Subscribe button handler
-        document.getElementById('subscribe').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Add your subscription logic here
-            alert('Subscribe feature coming soon! Follow @gomunster for updates.');
-        });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayJobs);
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
