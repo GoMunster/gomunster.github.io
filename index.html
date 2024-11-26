@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     
     <style>
-        /* Custom Styles */
         body {
             background-color: #0f172a;
             color: #f1f5f9;
@@ -55,6 +54,31 @@
             display: inline-block;
             margin: 0.25rem;
         }
+
+        .grid-card {
+            background-color: rgba(51, 65, 85, 0.5);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .feature-card {
+            background-color: rgba(45, 212, 191, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .tool-card {
+            background-color: rgba(51, 65, 85, 0.5);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tool-card:hover {
+            background-color: rgba(51, 65, 85, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -83,8 +107,17 @@
                 Digital Nomad Intel
             </h2>
             <h3 class="text-lg font-medium mb-2">Today's Topic: Portugal D7 Visa</h3>
-            <p>Did you know Portugal's D7 visa lets you live and work remotely while enjoying Mediterranean life? 
+            <p class="text-gray-300">Did you know Portugal's D7 visa lets you live and work remotely while enjoying Mediterranean life? 
                Minimum income requirement: €760/month. Perfect for freelancers and remote workers!</p>
+            <div class="mt-4 bg-slate-700/50 p-4 rounded">
+                <h4 class="font-medium text-teal-300 mb-2">Key Requirements:</h4>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li>Proof of regular passive income</li>
+                    <li>Clean criminal record</li>
+                    <li>Health insurance</li>
+                    <li>Proof of accommodation</li>
+                </ul>
+            </div>
         </section>
 
         <!-- Remote Job Radar -->
@@ -94,10 +127,39 @@
                 Remote Job Radar
             </h2>
             <div class="grid md:grid-cols-2 gap-4">
-                <!-- Job Board Links -->
                 <div class="space-y-4">
                     <h3 class="text-lg font-medium mb-2">Top Job Boards</h3>
-                    <!-- Add job board items here -->
+                    <a href="#" class="block grid-card card-hover">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">We Work Remotely</span>
+                            <span class="text-teal-400 text-sm">2,453 jobs</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">Tech, Marketing, Customer Support</p>
+                    </a>
+                    <a href="#" class="block grid-card card-hover">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">Remote.co</span>
+                            <span class="text-teal-400 text-sm">1,829 jobs</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">Development, Design, Writing</p>
+                    </a>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium mb-2">Specialty Boards</h3>
+                    <a href="#" class="block grid-card card-hover">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">Growth.design</span>
+                            <span class="text-teal-400 text-sm">127 jobs</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">Product & UX roles</p>
+                    </a>
+                    <a href="#" class="block grid-card card-hover">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">ProBlogger</span>
+                            <span class="text-teal-400 text-sm">234 jobs</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">Writing & Content Creation</p>
+                    </a>
                 </div>
             </div>
         </section>
@@ -108,7 +170,26 @@
                 <i data-lucide="lightbulb" class="inline mr-2"></i>
                 Digital Marketing Daily
             </h2>
-            <!-- Add marketing content here -->
+            <div class="space-y-6">
+                <div class="grid-card">
+                    <h3 class="text-lg font-medium mb-2">💡 Today's Marketing Tip</h3>
+                    <p class="text-gray-300">
+                        Use Google Search Console's Performance Report to identify your top-performing content in different countries. 
+                        This helps tailor your content strategy for global audiences.
+                    </p>
+                </div>
+                
+                <div class="grid-card">
+                    <h3 class="text-lg font-medium mb-2">📚 Resource Spotlight</h3>
+                    <div class="bg-slate-700 p-4 rounded">
+                        <h4 class="font-medium text-teal-300">SEMrush Academy</h4>
+                        <p class="text-sm text-gray-300 mt-1">
+                            Free SEO certification courses to boost your digital marketing skills.
+                        </p>
+                        <button class="btn-primary mt-2">Start Learning</button>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Daily Listen -->
@@ -117,7 +198,22 @@
                 <i data-lucide="headphones" class="inline mr-2"></i>
                 Daily Listen
             </h2>
-            <!-- Add podcast content here -->
+            <div class="flex items-start gap-4">
+                <div class="bg-slate-700 w-24 h-24 rounded flex-shrink-0"></div>
+                <div>
+                    <span class="text-sm text-teal-400">NOMAD PODCAST OF THE DAY</span>
+                    <h3 class="text-lg font-medium">The Digital Marketing Podcast</h3>
+                    <h4 class="text-gray-300">Episode: "Building a Location-Independent Agency"</h4>
+                    <p class="text-sm text-gray-400 mt-2">
+                        Learn how to transition from freelancing to building a full-service digital agency you can run from anywhere. 
+                        Duration: 45 mins
+                    </p>
+                    <button class="btn-primary mt-3">
+                        <i data-lucide="headphones" class="w-4 h-4"></i>
+                        Listen Now
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- Nomad Self-Care Corner -->
@@ -126,7 +222,30 @@
                 <i data-lucide="heart" class="inline mr-2"></i>
                 Nomad Self-Care Corner
             </h2>
-            <!-- Add self-care content here -->
+            <div class="space-y-4">
+                <div class="grid-card">
+                    <h3 class="text-lg font-medium text-teal-300 mb-2">Today's Self-Care Challenge</h3>
+                    <p class="text-gray-300">
+                        Practice the "5-4-3-2-1" Grounding Exercise: In your new environment, identify 5 things you can see, 
+                        4 things you can touch, 3 things you can hear, 2 things you can smell, and 1 thing you can taste.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="grid-card">
+                        <h4 class="font-medium text-teal-300 mb-2">Body</h4>
+                        <p class="text-sm text-gray-300">
+                            15-minute hotel room yoga flow for digital nomads (no equipment needed)
+                        </p>
+                    </div>
+                    <div class="grid-card">
+                        <h4 class="font-medium text-teal-300 mb-2">Mind</h4>
+                        <p class="text-sm text-gray-300">
+                            Journal prompt: Write about one challenge you've overcome in your nomad journey
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Community Spotlight -->
@@ -135,7 +254,36 @@
                 <i data-lucide="users" class="inline mr-2"></i>
                 Community Spotlight
             </h2>
-            <!-- Add community content here -->
+            <div class="grid-card">
+                <div class="flex items-start gap-4">
+                    <div class="bg-slate-600 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                    <div>
+                        <h3 class="text-lg font-medium">Digital Nomad Girls Community</h3>
+                        <p class="text-sm text-teal-400 mb-2">Facebook Group • 65k Members</p>
+                        <p class="text-gray-300">
+                            A supportive community for women digital nomads with daily co-working sessions, 
+                            mentorship opportunities, and location meetups.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-2 gap-4">
+                    <div class="grid-card">
+                        <h4 class="font-medium text-teal-300 mb-2">Today's Events</h4>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li>• Virtual Coffee Hour (2pm UTC)</li>
+                            <li>• SEO Workshop (6pm UTC)</li>
+                            <li>• Bali Meetup (Local Time: 7pm)</li>
+                        </ul>
+                    </div>
+                    <div class="grid-card">
+                        <h4 class="font-medium text-teal-300 mb-2">Featured Discussion</h4>
+                        <p class="text-sm text-gray-300">
+                            "How do you maintain work-life balance while traveling? Share your tips!"
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Daily Skill Builder -->
@@ -144,16 +292,126 @@
                 <i data-lucide="graduation-cap" class="inline mr-2"></i>
                 Daily Skill Builder
             </h2>
-            <!-- Add skill building content here -->
+            <div class="grid-card">
+                <div class="flex items-start gap-4">
+                    <i data-lucide="code" class="text-teal-400 w-8 h-8 flex-shrink-0"></i>
+                    <div>
+                        <span class="text-sm text-teal-400">FEATURED SKILL PATH</span>
+                        <h3 class="text-lg font-medium">Frontend Development for Creators</h3>
+                        <p class="text-gray-300 mt-2">
+                            Build your own portfolio and landing pages. Perfect for digital marketers 
+                            and content creators who want to reduce their dependency on developers.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">WordPress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Nomad Toolbox -->
         <section class="section-card">
+            <!-- Continuing from Nomad Toolbox section -->
             <h2 class="text-2xl font-semibold highlight-text mb-4">
                 <i data-lucide="wrench" class="inline mr-2"></i>
                 Nomad Toolbox
             </h2>
-            <!-- Add tools content here -->
+            
+            <!-- Featured Tool -->
+            <div class="grid-card mb-6">
+                <div class="flex items-start gap-4">
+                    <div class="bg-slate-600 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                    <div>
+                        <span class="text-sm text-teal-400">TOOL OF THE DAY</span>
+                        <h3 class="text-lg font-medium">Notion</h3>
+                        <p class="text-gray-300 mt-2">
+                            All-in-one workspace for notes, projects, and team collaboration. 
+                            Perfect for managing your business while traveling.
+                        </p>
+                        <div class="mt-4 flex items-center gap-4">
+                            <span class="text-teal-400">Free Plan Available</span>
+                            <button class="btn-primary">Try It Free</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools Categories -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Productivity Tools -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-medium flex items-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4 text-teal-400"></i>
+                        Productivity
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Asana</span>
+                                <span class="text-xs text-teal-400">Project Management</span>
+                            </div>
+                        </a>
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Clockify</span>
+                                <span class="text-xs text-teal-400">Time Tracking</span>
+                            </div>
+                        </a>
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Forest</span>
+                                <span class="text-xs text-teal-400">Focus Timer</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Business Tools -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-medium flex items-center gap-2">
+                        <i data-lucide="calculator" class="w-4 h-4 text-teal-400"></i>
+                        Business
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Wise</span>
+                                <span class="text-xs text-teal-400">International Payments</span>
+                            </div>
+                        </a>
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Stripe</span>
+                                <span class="text-xs text-teal-400">Payment Processing</span>
+                            </div>
+                        </a>
+                        <a href="#" class="tool-card block">
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">Wave</span>
+                                <span class="text-xs text-teal-400">Free Accounting</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool Stack -->
+            <div class="feature-card mt-6">
+                <h4 class="font-medium text-teal-400 mb-2">Featured Tool Stack</h4>
+                <p class="text-sm text-gray-300 mb-3">
+                    Social Media Manager's Essential Stack
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tag">Later</span>
+                    <span class="tag">Canva Pro</span>
+                    <span class="tag">Hootsuite</span>
+                    <span class="tag">Grammarly</span>
+                    <span class="tag">LinkTree</span>
+                </div>
+            </div>
         </section>
 
         <!-- Footer -->
@@ -181,6 +439,26 @@
 
         // Initialize Lucide icons
         lucide.createIcons();
+
+        // Add hover effects to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.backgroundColor = '#334155';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.backgroundColor = 'rgba(51, 65, 85, 0.5)';
+            });
+        });
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
