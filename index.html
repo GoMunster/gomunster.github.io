@@ -3,49 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Nomad Daily - Your Digital Nomad Resource</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <title>The Nomad Daily</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
-    
     <style>
         body {
             background-color: #0f172a;
             color: #f1f5f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
         }
-        
-        .section-card {
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2dd4bf;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #2dd4bf;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .date {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-box {
             background-color: #1e293b;
             border: 1px solid rgba(45, 212, 191, 0.2);
             border-radius: 0.5rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: left;
         }
-        
-        .highlight-text {
-            color: #2dd4bf;
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin: 2rem 0;
+            text-align: center;
+            color: #e2e8f0;
         }
-        
-        .card-hover:hover {
-            background-color: #334155;
-            transition: background-color 0.2s;
-        }
-        
-        .btn-primary {
+
+        .btn {
             background-color: #0d9488;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 0.375rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
-        
-        .btn-primary:hover {
+
+        .btn:hover {
             background-color: #0f766e;
         }
-        
+
         .tag {
             background-color: #334155;
             padding: 0.25rem 0.75rem;
@@ -55,375 +93,165 @@
             margin: 0.25rem;
         }
 
-        .grid-card {
-            background-color: rgba(51, 65, 85, 0.5);
-            padding: 1rem;
-            border-radius: 0.5rem;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
 
-        .feature-card {
-            background-color: rgba(45, 212, 191, 0.1);
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-
-        .tool-card {
+        .card {
             background-color: rgba(51, 65, 85, 0.5);
-            padding: 0.75rem;
+            padding: 1.5rem;
             border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
             transition: background-color 0.2s;
         }
 
-        .tool-card:hover {
+        .card:hover {
             background-color: rgba(51, 65, 85, 0.8);
+        }
+
+        .highlight {
+            color: #2dd4bf;
+            font-weight: bold;
+        }
+
+        .divider {
+            border-top: 1px solid #334155;
+            margin: 2rem auto;
+            width: 50%;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2dd4bf;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            .content-box {
+                padding: 1.5rem 1rem;
+            }
+            
+            .quote {
+                font-size: 1.25rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Header -->
-        <header class="mb-12 text-center">
-            <h1 class="text-4xl font-bold highlight-text mb-2">The Nomad Daily</h1>
-            <p class="text-xl text-gray-400" id="current-date"></p>
+    <div class="container">
+        <header>
+            <h1>THE NOMAD DAILY</h1>
+            <div class="date" id="current-date"></div>
         </header>
 
-        <!-- Quote Section -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="compass" class="inline mr-2"></i>
-                Wanderlust Quote of the Day
-            </h2>
-            <blockquote class="text-xl italic">
-                "Life is either a daring adventure or nothing at all." - Helen Keller
-            </blockquote>
-        </section>
+        <main>
+            <!-- Quote Section -->
+            <section>
+                <div class="quote">
+                    "Life is either a daring adventure or nothing at all." - Helen Keller
+                </div>
+            </section>
 
-        <!-- Digital Nomad Intel -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="globe" class="inline mr-2"></i>
-                Digital Nomad Intel
-            </h2>
-            <h3 class="text-lg font-medium mb-2">Today's Topic: Portugal D7 Visa</h3>
-            <p class="text-gray-300">Did you know Portugal's D7 visa lets you live and work remotely while enjoying Mediterranean life? 
-               Minimum income requirement: €760/month. Perfect for freelancers and remote workers!</p>
-            <div class="mt-4 bg-slate-700/50 p-4 rounded">
-                <h4 class="font-medium text-teal-300 mb-2">Key Requirements:</h4>
-                <ul class="list-disc list-inside text-gray-300">
-                    <li>Proof of regular passive income</li>
-                    <li>Clean criminal record</li>
-                    <li>Health insurance</li>
-                    <li>Proof of accommodation</li>
-                </ul>
-            </div>
-        </section>
+            <!-- Visa Intel -->
+            <section>
+                <h2><i data-lucide="globe" class="inline"></i> NOMAD INTEL</h2>
+                <div class="content-box">
+                    <p><span class="highlight">TODAY'S TOPIC:</span> Portugal D7 Visa</p>
+                    <p>Did you know Portugal's D7 visa lets you live and work remotely while enjoying Mediterranean life? Minimum income requirement: €760/month.</p>
+                    <a href="#" class="btn">Learn More →</a>
+                </div>
+            </section>
 
-        <!-- Remote Job Radar -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="briefcase" class="inline mr-2"></i>
-                Remote Job Radar
-            </h2>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium mb-2">Top Job Boards</h3>
-                    <a href="#" class="block grid-card card-hover">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">We Work Remotely</span>
-                            <span class="text-teal-400 text-sm">2,453 jobs</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Tech, Marketing, Customer Support</p>
-                    </a>
-                    <a href="#" class="block grid-card card-hover">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Remote.co</span>
-                            <span class="text-teal-400 text-sm">1,829 jobs</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Development, Design, Writing</p>
-                    </a>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium mb-2">Specialty Boards</h3>
-                    <a href="#" class="block grid-card card-hover">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Growth.design</span>
-                            <span class="text-teal-400 text-sm">127 jobs</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Product & UX roles</p>
-                    </a>
-                    <a href="#" class="block grid-card card-hover">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">ProBlogger</span>
-                            <span class="text-teal-400 text-sm">234 jobs</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-1">Writing & Content Creation</p>
-                    </a>
-                </div>
-            </div>
-        </section>
+            <div class="divider"></div>
 
-        <!-- Digital Marketing Daily -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="lightbulb" class="inline mr-2"></i>
-                Digital Marketing Daily
-            </h2>
-            <div class="space-y-6">
-                <div class="grid-card">
-                    <h3 class="text-lg font-medium mb-2">💡 Today's Marketing Tip</h3>
-                    <p class="text-gray-300">
-                        Use Google Search Console's Performance Report to identify your top-performing content in different countries. 
-                        This helps tailor your content strategy for global audiences.
-                    </p>
-                </div>
-                
-                <div class="grid-card">
-                    <h3 class="text-lg font-medium mb-2">📚 Resource Spotlight</h3>
-                    <div class="bg-slate-700 p-4 rounded">
-                        <h4 class="font-medium text-teal-300">SEMrush Academy</h4>
-                        <p class="text-sm text-gray-300 mt-1">
-                            Free SEO certification courses to boost your digital marketing skills.
-                        </p>
-                        <button class="btn-primary mt-2">Start Learning</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Daily Listen -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="headphones" class="inline mr-2"></i>
-                Daily Listen
-            </h2>
-            <div class="flex items-start gap-4">
-                <div class="bg-slate-700 w-24 h-24 rounded flex-shrink-0"></div>
-                <div>
-                    <span class="text-sm text-teal-400">NOMAD PODCAST OF THE DAY</span>
-                    <h3 class="text-lg font-medium">The Digital Marketing Podcast</h3>
-                    <h4 class="text-gray-300">Episode: "Building a Location-Independent Agency"</h4>
-                    <p class="text-sm text-gray-400 mt-2">
-                        Learn how to transition from freelancing to building a full-service digital agency you can run from anywhere. 
-                        Duration: 45 mins
-                    </p>
-                    <button class="btn-primary mt-3">
-                        <i data-lucide="headphones" class="w-4 h-4"></i>
-                        Listen Now
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Nomad Self-Care Corner -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="heart" class="inline mr-2"></i>
-                Nomad Self-Care Corner
-            </h2>
-            <div class="space-y-4">
-                <div class="grid-card">
-                    <h3 class="text-lg font-medium text-teal-300 mb-2">Today's Self-Care Challenge</h3>
-                    <p class="text-gray-300">
-                        Practice the "5-4-3-2-1" Grounding Exercise: In your new environment, identify 5 things you can see, 
-                        4 things you can touch, 3 things you can hear, 2 things you can smell, and 1 thing you can taste.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="grid-card">
-                        <h4 class="font-medium text-teal-300 mb-2">Body</h4>
-                        <p class="text-sm text-gray-300">
-                            15-minute hotel room yoga flow for digital nomads (no equipment needed)
-                        </p>
-                    </div>
-                    <div class="grid-card">
-                        <h4 class="font-medium text-teal-300 mb-2">Mind</h4>
-                        <p class="text-sm text-gray-300">
-                            Journal prompt: Write about one challenge you've overcome in your nomad journey
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community Spotlight -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="users" class="inline mr-2"></i>
-                Community Spotlight
-            </h2>
-            <div class="grid-card">
-                <div class="flex items-start gap-4">
-                    <div class="bg-slate-600 w-16 h-16 rounded-lg flex-shrink-0"></div>
-                    <div>
-                        <h3 class="text-lg font-medium">Digital Nomad Girls Community</h3>
-                        <p class="text-sm text-teal-400 mb-2">Facebook Group • 65k Members</p>
-                        <p class="text-gray-300">
-                            A supportive community for women digital nomads with daily co-working sessions, 
-                            mentorship opportunities, and location meetups.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="mt-4 grid grid-cols-2 gap-4">
-                    <div class="grid-card">
-                        <h4 class="font-medium text-teal-300 mb-2">Today's Events</h4>
-                        <ul class="space-y-2 text-sm text-gray-300">
-                            <li>• Virtual Coffee Hour (2pm UTC)</li>
-                            <li>• SEO Workshop (6pm UTC)</li>
-                            <li>• Bali Meetup (Local Time: 7pm)</li>
-                        </ul>
-                    </div>
-                    <div class="grid-card">
-                        <h4 class="font-medium text-teal-300 mb-2">Featured Discussion</h4>
-                        <p class="text-sm text-gray-300">
-                            "How do you maintain work-life balance while traveling? Share your tips!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Daily Skill Builder -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="graduation-cap" class="inline mr-2"></i>
-                Daily Skill Builder
-            </h2>
-            <div class="grid-card">
-                <div class="flex items-start gap-4">
-                    <i data-lucide="code" class="text-teal-400 w-8 h-8 flex-shrink-0"></i>
-                    <div>
-                        <span class="text-sm text-teal-400">FEATURED SKILL PATH</span>
-                        <h3 class="text-lg font-medium">Frontend Development for Creators</h3>
-                        <p class="text-gray-300 mt-2">
-                            Build your own portfolio and landing pages. Perfect for digital marketers 
-                            and content creators who want to reduce their dependency on developers.
-                        </p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">WordPress</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Nomad Toolbox -->
-        <section class="section-card">
-            <!-- Continuing from Nomad Toolbox section -->
-            <h2 class="text-2xl font-semibold highlight-text mb-4">
-                <i data-lucide="wrench" class="inline mr-2"></i>
-                Nomad Toolbox
-            </h2>
-            
-            <!-- Featured Tool -->
-            <div class="grid-card mb-6">
-                <div class="flex items-start gap-4">
-                    <div class="bg-slate-600 w-16 h-16 rounded-lg flex-shrink-0"></div>
-                    <div>
-                        <span class="text-sm text-teal-400">TOOL OF THE DAY</span>
-                        <h3 class="text-lg font-medium">Notion</h3>
-                        <p class="text-gray-300 mt-2">
-                            All-in-one workspace for notes, projects, and team collaboration. 
-                            Perfect for managing your business while traveling.
-                        </p>
-                        <div class="mt-4 flex items-center gap-4">
-                            <span class="text-teal-400">Free Plan Available</span>
-                            <button class="btn-primary">Try It Free</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tools Categories -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Productivity Tools -->
-                <div class="space-y-3">
-                    <h3 class="text-lg font-medium flex items-center gap-2">
-                        <i data-lucide="zap" class="w-4 h-4 text-teal-400"></i>
-                        Productivity
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Asana</span>
-                                <span class="text-xs text-teal-400">Project Management</span>
-                            </div>
+            <!-- Job Radar -->
+            <section>
+                <h2><i data-lucide="briefcase" class="inline"></i> JOB RADAR</h2>
+                <div class="content-box">
+                    <div class="grid">
+                        <a href="#" class="card">
+                            <p class="highlight">We Work Remotely</p>
+                            <p>2,453 jobs</p>
                         </a>
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Clockify</span>
-                                <span class="text-xs text-teal-400">Time Tracking</span>
-                            </div>
-                        </a>
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Forest</span>
-                                <span class="text-xs text-teal-400">Focus Timer</span>
-                            </div>
+                        <a href="#" class="card">
+                            <p class="highlight">Remote.co</p>
+                            <p>1,829 jobs</p>
                         </a>
                     </div>
                 </div>
+            </section>
 
-                <!-- Business Tools -->
-                <div class="space-y-3">
-                    <h3 class="text-lg font-medium flex items-center gap-2">
-                        <i data-lucide="calculator" class="w-4 h-4 text-teal-400"></i>
-                        Business
-                    </h3>
-                    <div class="space-y-2">
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Wise</span>
-                                <span class="text-xs text-teal-400">International Payments</span>
-                            </div>
-                        </a>
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Stripe</span>
-                                <span class="text-xs text-teal-400">Payment Processing</span>
-                            </div>
-                        </a>
-                        <a href="#" class="tool-card block">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Wave</span>
-                                <span class="text-xs text-teal-400">Free Accounting</span>
-                            </div>
-                        </a>
-                    </div>
+            <div class="divider"></div>
+
+            <!-- Marketing Tip -->
+            <section>
+                <h2><i data-lucide="lightbulb" class="inline"></i> MARKETING TIP</h2>
+                <div class="content-box">
+                    <p>Use Google Search Console's Performance Report to identify your top-performing content in different countries.</p>
+                    <div class="tag">SEO</div>
+                    <div class="tag">Analytics</div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Tool Stack -->
-            <div class="feature-card mt-6">
-                <h4 class="font-medium text-teal-400 mb-2">Featured Tool Stack</h4>
-                <p class="text-sm text-gray-300 mb-3">
-                    Social Media Manager's Essential Stack
-                </p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="tag">Later</span>
-                    <span class="tag">Canva Pro</span>
-                    <span class="tag">Hootsuite</span>
-                    <span class="tag">Grammarly</span>
-                    <span class="tag">LinkTree</span>
+            <div class="divider"></div>
+
+            <!-- Podcast -->
+            <section>
+                <h2><i data-lucide="headphones" class="inline"></i> DAILY LISTEN</h2>
+                <div class="content-box">
+                    <p class="highlight">The Digital Marketing Podcast</p>
+                    <p>"Building a Location-Independent Agency"</p>
+                    <p>Duration: 45 mins</p>
+                    <a href="#" class="btn">Listen Now →</a>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="mt-12 pt-8 border-t border-gray-700">
-            <div class="flex justify-between items-center">
-                <button class="text-gray-400 hover:text-teal-400 transition-colors">
-                    ← Yesterday's Post
-                </button>
-                <i data-lucide="bookmark" class="text-teal-400 cursor-pointer hover:text-teal-300"></i>
-                <button class="text-gray-400 hover:text-teal-400 transition-colors">
-                    Archive →
-                </button>
+            <!-- Additional sections follow the same pattern -->
+            <!-- Tool of the Day -->
+            <div class="divider"></div>
+
+            <section>
+                <h2><i data-lucide="wrench" class="inline"></i> TOOL OF THE DAY</h2>
+                <div class="content-box">
+                    <p class="highlight">Notion</p>
+                    <p>All-in-one workspace for notes, projects, and team collaboration.</p>
+                    <p>Free Plan Available</p>
+                    <a href="#" class="btn">Try It Free →</a>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="nav-links">
+                <a href="#">← Yesterday</a>
+                <i data-lucide="bookmark" class="text-teal-400 cursor-pointer"></i>
+                <a href="#">Archive →</a>
             </div>
         </footer>
     </div>
@@ -435,30 +263,10 @@
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-        });
+        }).toUpperCase();
 
         // Initialize Lucide icons
         lucide.createIcons();
-
-        // Add hover effects to cards
-        document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.backgroundColor = '#334155';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.backgroundColor = 'rgba(51, 65, 85, 0.5)';
-            });
-        });
-
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
