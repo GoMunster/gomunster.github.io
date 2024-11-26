@@ -237,20 +237,105 @@
     </div>
 
     <div class="section">
-        <h2>💼 HOT REMOTE JOBS</h2>
-        <div id="jobsContainer">
-            <div class="loading">Loading latest jobs...</div>
-        </div>
+    <h2>💼 HOT REMOTE JOBS</h2>
+    
+    <div class="search-box">
+        <input 
+            type="text" 
+            id="jobSearch" 
+            placeholder="Enter your job title (e.g., developer, designer, writer)"
+            value="developer"
+        >
+        <button onclick="searchJobs()">Find Jobs</button>
     </div>
-    <script>
-    // Configuration for RSS feeds
+    
+    <div id="jobsContainer">
+        <div class="loading">Loading latest jobs...</div>
+    </div>
+</div>
+
+<style>
+    .search-box {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .search-box input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid #2a2a2a;
+        border-radius: 6px;
+        background: #1a1a1a;
+        color: #e0e0e0;
+        font-family: inherit;
+        font-size: 14px;
+    }
+    
+    .search-box input:focus {
+        outline: none;
+        border-color: #00ff88;
+        box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.1);
+    }
+    
+    .search-box input::placeholder {
+        color: #666;
+    }
+    
+    .search-box button {
+        padding: 12px 24px;
+        background: #00ff88;
+        border: none;
+        border-radius: 6px;
+        color: #0a0a0a;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .search-box button:hover {
+        background: #00cc6a;
+        transform: translateY(-1px);
+    }
+    
+    .search-box button:active {
+        transform: translateY(1px);
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 20px;
+        background: #1a1a1a;
+        border-radius: 6px;
+        color: #888;
+    }
+    
+    /* Animation for job cards */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .job-card {
+        animation: slideIn 0.3s ease-out forwards;
+    }
+</style>
+
+<script>
+    // Configuration for RSS feeds with dynamic search
     const RSS_FEEDS = {
-        WWR: 'https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss',
-        REMOTEOK: 'https://remoteok.io/remote-dev-jobs.rss',
-        GITHUB: 'https://jobs.github.com/positions.atom'
+        WWR: (query) => `https://weworkremotely.com/remote-jobs-search.rss?term=${query}`,
+        REMOTEOK: (query) => `https://remoteok.io/remote-${query}-jobs.rss`,
+        GITHUB: (query) => `https://jobs.github.com/positions.atom?search=${query}&location=remote`
     };
 
-    // Using a more reliable CORS proxy
+    // Using a reliable CORS proxy
     const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
     // Function to clean HTML from description
@@ -258,6 +343,11 @@
         const temp = document.createElement('div');
         temp.innerHTML = html;
         return temp.textContent || temp.innerText;
+    }
+
+    // Function to normalize job titles for matching
+    function normalizeJobTitle(title) {
+        return title.toLowerCase().replace(/[^a-z0-9]/g, '');
     }
 
     // Create HTML for a single job card
@@ -294,24 +384,46 @@
         }));
     }
 
-    // Function to fetch jobs from RSS feed
-    async function fetchJobsRSS() {
+    // Function to fetch jobs based on search term
+    async function fetchJobsWithSearch(searchTerm) {
         const jobsContainer = document.getElementById('jobsContainer');
+        const normalizedSearch = normalizeJobTitle(searchTerm);
         
         try {
-            // Try fetching from We Work Remotely first as it's usually most reliable
-            const response = await fetch(`${CORS_PROXY}${encodeURIComponent(RSS_FEEDS.WWR)}`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const text = await response.text();
+            // Show loading state
+            jobsContainer.innerHTML = '<div class="loading">Searching for remote jobs...</div>';
             
-            // Parse the RSS feed
-            const jobs = parseRSS(text);
+            // Try fetching from multiple sources
+            const feedPromises = Object.entries(RSS_FEEDS).map(async ([source, urlFn]) => {
+                try {
+                    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(urlFn(searchTerm))}`);
+                    if (!response.ok) return [];
+                    
+                    const text = await response.text();
+                    const jobs = parseRSS(text);
+                    
+                    return jobs.map(job => ({
+                        ...job,
+                        source: source
+                    }));
+                } catch (error) {
+                    console.error(`Error fetching from ${source}:`, error);
+                    return [];
+                }
+            });
+
+            const allJobs = (await Promise.all(feedPromises)).flat();
             
-            // Take the first 3 jobs
-            const recentJobs = jobs.slice(0, 3).map(job => ({
-                ...job,
-                source: 'We Work Remotely'
-            }));
+            // Filter jobs based on search term
+            const filteredJobs = allJobs.filter(job => 
+                normalizeJobTitle(job.title).includes(normalizedSearch) ||
+                normalizeJobTitle(job.description).includes(normalizedSearch)
+            );
+
+            // Sort by date and take the most recent 3
+            const recentJobs = filteredJobs
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
 
             // Update the DOM
             if (recentJobs.length > 0) {
@@ -319,33 +431,55 @@
                     .map(job => createJobCard(job))
                     .join('');
             } else {
-                throw new Error('No jobs found');
+                jobsContainer.innerHTML = `
+                    <div class="no-results">
+                        <p>No remote jobs found for "${searchTerm}"</p>
+                        <p style="font-size: 14px; margin-top: 10px;">
+                            Try:
+                            <br>• Using broader terms
+                            <br>• Removing specific technologies
+                            <br>• Checking common job titles
+                        </p>
+                    </div>
+                `;
             }
 
         } catch (error) {
             console.error('Error fetching jobs:', error);
             jobsContainer.innerHTML = `
-                <div class="loading">
-                    <p>Currently aggregating the latest remote jobs...</p>
-                    <p style="font-size: 14px; color: #666;">
+                <div class="no-results">
+                    <p>Unable to fetch jobs at the moment.</p>
+                    <p style="font-size: 14px; margin-top: 10px;">
                         Meanwhile, check out:
                         <br>
                         <a href="https://weworkremotely.com" target="_blank">We Work Remotely</a>
                         <br>
                         <a href="https://remoteok.io" target="_blank">RemoteOK</a>
-                        <br>
-                        <a href="https://www.flexjobs.com" target="_blank">FlexJobs</a>
                     </p>
                 </div>
             `;
         }
     }
 
-    // Fetch jobs when the page loads
-    document.addEventListener('DOMContentLoaded', fetchJobsRSS);
+    // Function to handle job search
+    function searchJobs() {
+        const searchTerm = document.getElementById('jobSearch').value.trim();
+        if (searchTerm) {
+            fetchJobsWithSearch(searchTerm);
+        }
+    }
 
-    // Refresh jobs every 30 minutes
-    setInterval(fetchJobsRSS, 30 * 60 * 1000);
+    // Add enter key support for search
+    document.getElementById('jobSearch').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchJobs();
+        }
+    });
+
+    // Initial job fetch with default search term
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchJobsWithSearch('developer'); // Default search term
+    });
 </script>
 </body>
 </html>
