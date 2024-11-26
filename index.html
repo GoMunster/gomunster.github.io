@@ -243,90 +243,110 @@
         </div>
     </div>
     <script>
-        // Configuration for RSS feeds
-        const RSS_FEEDS = {
-            WWR: 'https://weworkremotely.com/categories/remote-programming-jobs.rss',
-            REMOTEOK: 'https://remoteok.com/remote-dev-jobs.rss',
-            STACKOVERFLOW: 'https://stackoverflow.com/jobs/feed?r=true'
-        };
+    // Configuration for RSS feeds
+    const RSS_FEEDS = {
+        WWR: 'https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss',
+        REMOTEOK: 'https://remoteok.io/remote-dev-jobs.rss',
+        GITHUB: 'https://jobs.github.com/positions.atom'
+    };
 
-        // Using a CORS proxy to avoid cross-origin issues
-        const CORS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    // Using a more reliable CORS proxy
+    const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
-        // Function to parse salary from job description
-        function parseSalary(description) {
-            const salaryMatch = description.match(/\$\d+[kK]-\$\d+[kK]/);
-            return salaryMatch ? salaryMatch[0] : '';
-        }
+    // Function to clean HTML from description
+    function cleanDescription(html) {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        return temp.textContent || temp.innerText;
+    }
 
-        // Create HTML for a single job card
-        function createJobCard(job) {
-            const salary = parseSalary(job.description);
-            return `
-                <div class="job-card">
-                    <div class="job-title">${job.title}</div>
-                    <div class="job-company">${job.company || 'Company Name'}</div>
-                    <div class="job-details">
-                        ${job.contentSnippet || job.description.slice(0, 100)}...
-                        ${salary ? `<span class="salary">${salary}</span>` : ''}
-                    </div>
-                    <div class="job-source">
-                        <a href="${job.link}" target="_blank">Apply Now</a>
-                    </div>
+    // Create HTML for a single job card
+    function createJobCard(job) {
+        const cleanDesc = cleanDescription(job.description).slice(0, 150) + '...';
+        return `
+            <div class="job-card">
+                <div class="job-title">${job.title}</div>
+                <div class="job-company">${job.company || 'Company Name'}</div>
+                <div class="job-details">
+                    ${cleanDesc}
                 </div>
-            `;
-        }
+                <div class="job-source">
+                    <a href="${job.link}" target="_blank" rel="noopener">View Job →</a>
+                    <span style="color: #666; float: right;">via ${job.source}</span>
+                </div>
+            </div>
+        `;
+    }
 
-        // Function to fetch jobs from RSS feed
-        async function fetchJobsRSS() {
-            const jobsContainer = document.getElementById('jobsContainer');
+    // Function to parse RSS XML
+    function parseRSS(text) {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'text/xml');
+        const items = xml.querySelectorAll('item');
+        
+        return Array.from(items).map(item => ({
+            title: item.querySelector('title')?.textContent || '',
+            description: item.querySelector('description')?.textContent || '',
+            link: item.querySelector('link')?.textContent || '',
+            company: item.querySelector('dc\\:creator')?.textContent || 
+                    item.querySelector('author')?.textContent || '',
+            date: item.querySelector('pubDate')?.textContent || '',
+        }));
+    }
+
+    // Function to fetch jobs from RSS feed
+    async function fetchJobsRSS() {
+        const jobsContainer = document.getElementById('jobsContainer');
+        
+        try {
+            // Try fetching from We Work Remotely first as it's usually most reliable
+            const response = await fetch(`${CORS_PROXY}${encodeURIComponent(RSS_FEEDS.WWR)}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const text = await response.text();
             
-            try {
-                // Fetch from multiple RSS feeds
-                const feedPromises = Object.entries(RSS_FEEDS).map(async ([source, url]) => {
-                    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
-                    const data = await response.json();
-                    
-                    // Map the items to a consistent format
-                    return data.items.map(item => ({
-                        title: item.title,
-                        description: item.description || item.content,
-                        link: item.link,
-                        company: item.author || source,
-                        date: item.pubDate,
-                        source: source
-                    }));
-                });
+            // Parse the RSS feed
+            const jobs = parseRSS(text);
+            
+            // Take the first 3 jobs
+            const recentJobs = jobs.slice(0, 3).map(job => ({
+                ...job,
+                source: 'We Work Remotely'
+            }));
 
-                // Wait for all feeds to be fetched
-                const allJobs = (await Promise.all(feedPromises)).flat();
-
-                // Sort by date and take the most recent 3
-                const recentJobs = allJobs
-                    .sort((a, b) => new Date(b.date) - new Date(a.date))
-                    .slice(0, 3);
-
-                // Update the DOM
+            // Update the DOM
+            if (recentJobs.length > 0) {
                 jobsContainer.innerHTML = recentJobs
                     .map(job => createJobCard(job))
                     .join('');
-
-            } catch (error) {
-                console.error('Error fetching jobs:', error);
-                jobsContainer.innerHTML = `
-                    <div class="error-message">
-                        Unable to load jobs at the moment. Please try again later.
-                    </div>
-                `;
+            } else {
+                throw new Error('No jobs found');
             }
+
+        } catch (error) {
+            console.error('Error fetching jobs:', error);
+            jobsContainer.innerHTML = `
+                <div class="loading">
+                    <p>Currently aggregating the latest remote jobs...</p>
+                    <p style="font-size: 14px; color: #666;">
+                        Meanwhile, check out:
+                        <br>
+                        <a href="https://weworkremotely.com" target="_blank">We Work Remotely</a>
+                        <br>
+                        <a href="https://remoteok.io" target="_blank">RemoteOK</a>
+                        <br>
+                        <a href="https://www.flexjobs.com" target="_blank">FlexJobs</a>
+                    </p>
+                </div>
+            `;
         }
+    }
 
-        // Fetch jobs when the page loads
-        document.addEventListener('DOMContentLoaded', fetchJobsRSS);
+    // Fetch jobs when the page loads
+    document.addEventListener('DOMContentLoaded', fetchJobsRSS);
 
-        // Refresh jobs every 30 minutes
-        setInterval(fetchJobsRSS, 30 * 60 * 1000);
-    </script>
+    // Refresh jobs every 30 minutes
+    setInterval(fetchJobsRSS, 30 * 60 * 1000);
+</script>
 </body>
 </html>
     
