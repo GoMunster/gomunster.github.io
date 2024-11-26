@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GO FUCKING REMOTE</title>
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +21,6 @@
             color: #333;
         }
 
-        /* Header styles */
         header {
             text-align: center;
             margin: 40px 0;
@@ -40,7 +38,6 @@
             margin-bottom: 30px;
         }
 
-        /* Section styles */
         section {
             background: white;
             padding: 30px;
@@ -56,7 +53,6 @@
             padding-bottom: 10px;
         }
 
-        /* Job card styles */
         .job-card {
             border: 1px solid #eee;
             padding: 20px;
@@ -71,16 +67,48 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .company {
-            color: #666;
-            font-size: 0.9em;
+        .job-title {
+            font-size: 1.4em;
+            color: #007bff;
+            margin-bottom: 10px;
         }
         
-        .description {
+        .company-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .company-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .company-website {
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .company-website:hover {
+            text-decoration: underline;
+        }
+        
+        .job-description {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .job-salary {
+            font-weight: 600;
+            color: #28a745;
             margin: 10px 0;
         }
         
-        .job-card a {
+        .apply-button {
             display: inline-block;
             padding: 8px 16px;
             background: #007bff;
@@ -88,13 +116,13 @@
             text-decoration: none;
             border-radius: 4px;
             transition: background 0.2s;
+            margin-top: 10px;
         }
         
-        .job-card a:hover {
+        .apply-button:hover {
             background: #0056b3;
         }
 
-        /* Affiliate section styles */
         .affiliate-card {
             background: #fff9e6;
             padding: 20px;
@@ -108,7 +136,21 @@
             margin-bottom: 10px;
         }
 
-        /* Footer styles */
+        .affiliate-card a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .affiliate-card a:hover {
+            background: #f57c00;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
@@ -116,7 +158,6 @@
             color: #666;
         }
 
-        /* Responsive design */
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -197,24 +238,62 @@
                 const xmlDoc = parser.parseFromString(text, 'text/xml');
                 const items = xmlDoc.getElementsByTagName('item');
                 
-                const jobsArray = Array.from(items).map(item => ({
-                    title: item.querySelector('title')?.textContent,
-                    link: item.querySelector('link')?.textContent,
-                    company: item.querySelector('description')?.textContent.split(' at ')[1]?.split('<')[0],
-                    description: item.querySelector('description')?.textContent
-                        .replace(/<\/?[^>]+(>|$)/g, '')
-                        .substring(0, 150) + '...'
-                }));
+                const jobsArray = Array.from(items).map(item => {
+                    const description = item.querySelector('description')?.textContent;
+                    const descriptionDoc = parser.parseFromString(description, 'text/html');
+                    
+                    // Parse the description HTML to extract more details
+                    const parseDescription = (desc) => {
+                        const div = document.createElement('div');
+                        div.innerHTML = desc;
+                        
+                        // Extract salary if it exists
+                        const salaryMatch = desc.match(/\$[\d,]+ ?- ?\$[\d,]+|\$[\d,]+/);
+                        const salary = salaryMatch ? salaryMatch[0] : null;
+                        
+                        // Extract company website if it exists
+                        const websiteLink = div.querySelector('a[href*="//"]')?.href;
+                        
+                        // Extract headquarters
+                        const hqMatch = desc.match(/Headquarters:\s*([^<\n]+)/);
+                        const headquarters = hqMatch ? hqMatch[1].trim() : null;
+                        
+                        // Clean description text
+                        const cleanDesc = desc
+                            .replace(/<[^>]+>/g, '') // Remove HTML tags
+                            .replace(/\s+/g, ' ') // Normalize whitespace
+                            .replace(/→.*$/, '') // Remove everything after arrow
+                            .trim()
+                            .substring(0, 300) + '...';
+                        
+                        return { salary, websiteLink, headquarters, cleanDesc };
+                    };
+                    
+                    const { salary, websiteLink, headquarters, cleanDesc } = parseDescription(description);
+                    
+                    return {
+                        title: item.querySelector('title')?.textContent,
+                        link: item.querySelector('link')?.textContent,
+                        company: description.split(' at ')[1]?.split('<')[0],
+                        description: cleanDesc,
+                        salary,
+                        website: websiteLink,
+                        headquarters
+                    };
+                });
                 
                 const shuffledJobs = jobsArray.sort(() => 0.5 - Math.random()).slice(0, 3);
                 
                 const jobsContainer = document.getElementById('daily-jobs');
                 jobsContainer.innerHTML = shuffledJobs.map(job => `
                     <div class="job-card">
-                        <h3>${job.title}</h3>
-                        <p class="company">${job.company}</p>
-                        <p class="description">${job.description}</p>
-                        <a href="${job.link}" target="_blank" rel="noopener noreferrer">
+                        <h3 class="job-title">${job.title}</h3>
+                        <p class="company-name">${job.company}</p>
+                        ${job.headquarters ? `<p class="company-details">🌍 ${job.headquarters}</p>` : ''}
+                        ${job.website ? `<a href="${job.website}" class="company-website" target="_blank" rel="noopener noreferrer">🔗 Company Website</a>` : ''}
+                        <p class="job-description">${job.description}</p>
+                        ${job.salary ? `<p class="job-salary">💰 ${job.salary}</p>` : ''}
+                        <a href="${job.link}" class="apply-button" target="_blank" rel="noopener noreferrer">
                             Apply Now →
                         </a>
                     </div>
@@ -242,9 +321,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', fetchAndDisplayJobs);
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
