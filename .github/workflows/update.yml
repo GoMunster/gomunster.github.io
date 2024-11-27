@@ -1,16 +1,18 @@
-# .github/workflows/update.yml
+# .github/workflows/daily-update.yml
 name: Daily Content Update
 
 on:
   schedule:
     - cron: '0 0 * * *'  # Run at midnight UTC
-  workflow_dispatch:      # Allow manual triggers
+  workflow_dispatch:      # Allows manual trigger from GitHub UI
 
 jobs:
   update-index:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
       
       - name: Update index with today's content
         run: |
@@ -22,4 +24,7 @@ jobs:
             git add index.html
             git commit -m "Update index for $TODAY"
             git push
+          else
+            echo "No content found for $TODAY"
+            exit 1
           fi
