@@ -242,28 +242,61 @@
         </section>
 
         <!-- Video of the Day -->
-        <section class="section-card">
+       <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎬 Video of the Day</h2>
-            <div class="relative w-full h-0 pb-[56.25%] mb-4" id="video-container">
-                <!-- Thumbnail with play button -->
-                <img 
-                    src="https://img.youtube.com/vi/1ziSDBlK5lY/maxresdefault.jpg" 
-                    alt="Study with Me for 4 Hours" 
-                    class="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
-                />
-                <button 
-                    onclick="loadYouTubeVideo('1ziSDBlK5lY')" 
-                    class="absolute inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-all rounded-lg"
-                >
-                    <div class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-                        <span class="text-black text-4xl" style="margin-left: 4px;">▶</span>
+            <div class="relative w-full" style="padding-bottom: 56.25%;" id="video-container">
+                <div class="absolute top-0 left-0 w-full h-full">
+                    <!-- Video thumbnail and play button -->
+                    <div class="relative w-full h-full" id="thumbnail-container">
+                        <img 
+                            src="https://img.youtube.com/vi/1ziSDBlK5lY/maxresdefault.jpg" 
+                            alt="Study with Me for 4 Hours" 
+                            class="w-full h-full object-cover rounded-lg"
+                        />
+                        <button 
+                            onclick="loadYouTubeVideo()"
+                            class="absolute inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-all rounded-lg"
+                        >
+                            <div class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
+                                <span class="text-black text-4xl" style="margin-left: 4px;">▶</span>
+                            </div>
+                        </button>
                     </div>
-                </button>
+                    <!-- YouTube iframe will be inserted here -->
+                </div>
             </div>
             <h3 class="text-xl mb-2">Study with Me for 4 Hours</h3>
             <p class="text-gray-400 mb-4">Spring of Yoo • 4:02:19</p>
             <a href="https://youtu.be/1ziSDBlK5lY?si=yuGrFUxJY4IdgtAZ" class="accent-button inline-block">Watch on YouTube</a>
         </section>
+
+<script>
+    function goToRandomDay() {
+        // Get list of archive days and redirect to a random one
+        // This will be implemented when we create the archive system
+        console.log('Random day feature coming soon!');
+    }
+
+    function loadYouTubeVideo() {
+        const thumbnailContainer = document.getElementById('thumbnail-container');
+        const videoContainer = document.getElementById('video-container').getElementsByClassName('absolute')[0];
+        
+        // Create the iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = "https://www.youtube.com/embed/1ziSDBlK5lY?autoplay=1";
+        iframe.title = "YouTube video player";
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.classList.add('rounded-lg');
+
+        // Remove the thumbnail and insert the iframe
+        thumbnailContainer.remove();
+        videoContainer.appendChild(iframe);
+    }
+</script>
         
         <!-- COPY UNTIL HERE FOR NEW DAYS -->
     </main>
@@ -272,27 +305,6 @@
         <p>© 2024 Go Munster - Updated daily with fresh nomadic goodness</p>
     </footer>
 
-    <script>
-        function goToRandomDay() {
-            // Get list of archive days and redirect to a random one
-            // This will be implemented when we create the archive system
-            console.log('Random day feature coming soon!');
-        }
-    </script>
-    <script>
-         function loadYouTubeVideo(videoId) {
-        const container = document.getElementById('video-container');
-        container.innerHTML = `
-            <iframe
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
-                allowfullscreen
-                class="absolute top-0 left-0 w-full h-full rounded-lg"
-            ></iframe>
-        `;
-    }
-    </script>
+ 
 </body>
 </html>
