@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives - Go Munster</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D3748;
+            --accent: #805AD5;
+            --text: #E2E8F0;
+            --highlight: #4FD1C5;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .archive-card {
+            background-color: rgba(44, 82, 130, 0.2);
+            border-radius: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .archive-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .highlight-tag {
+            background-color: var(--highlight);
+            color: var(--primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="text-center py-8">
+        <nav class="mb-8">
+            <a href="/" class="text-highlight hover:underline">← Back to Today</a>
+        </nav>
+        <h1 class="text-4xl font-bold mb-2">📚 Archives</h1>
+        <p class="text-xl text-gray-400">Journey through past wisdom</p>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-4xl">
+        <!-- Archive Navigation -->
+        <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
+            <div class="flex gap-4">
+                <select class="bg-gray-700 text-white px-4 py-2 rounded-lg">
+                    <option>2024</option>
+                    <option>2023</option>
+                </select>
+                <select class="bg-gray-700 text-white px-4 py-2 rounded-lg">
+                    <option>November</option>
+                    <option>October</option>
+                    <!-- Other months -->
+                </select>
+            </div>
+            <div class="relative">
+                <input 
+                    type="search" 
+                    placeholder="Search archives..." 
+                    class="bg-gray-700 text-white px-4 py-2 rounded-lg pl-10 w-64"
+                >
+                <span class="absolute left-3 top-2.5">🔍</span>
+            </div>
+        </div>
+
+        <!-- Archive Grid -->
+        <div class="space-y-6">
+            <!-- Archive Entry -->
+            <article class="archive-card p-6">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-2xl font-semibold">November 26, 2024</h2>
+                        <div class="flex gap-2 mt-2">
+                            <span class="highlight-tag">Marketing</span>
+                            <span class="highlight-tag">Productivity</span>
+                        </div>
+                    </div>
+                    <a href="#" class="accent-button px-4 py-2 rounded-lg">View Full Day</a>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-medium text-gray-400 mb-2">📖 Featured Book</h3>
+                        <p class="text-sm">Remote: Office Not Required</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-400 mb-2">🛠️ Tool Spotlight</h3>
+                        <p class="text-sm">Notion - Productivity Suite</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-400 mb-2">🎯 Marketing Tip</h3>
+                        <p class="text-sm">Instagram Reels Strategy</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-400 mb-2">🎓 Skill Focus</h3>
+                        <p class="text-sm">SEO Fundamentals</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h3 class="font-medium text-gray-400 mb-2">🌎 Quote of the Day</h3>
+                        <p class="text-sm italic">"Life is either a daring adventure or nothing at all." - Helen Keller</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Additional archive entries would follow the same pattern -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-between items-center mt-8">
+            <button class="accent-button px-4 py-2 rounded-lg">← Previous</button>
+            <div class="flex gap-2">
+                <button class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600">1</button>
+                <button class="px-4 py-2 rounded-lg bg-purple-600">2</button>
+                <button class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600">3</button>
+            </div>
+            <button class="accent-button px-4 py-2 rounded-lg">Next →</button>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-gray-400">
+        <p>© 2024 Go Munster - Updated daily with fresh nomadic goodness</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Archive navigation handling
+            const yearSelect = document.querySelector('select:first-of-type');
+            const monthSelect = document.querySelector('select:last-of-type');
+            
+            yearSelect.addEventListener('change', () => updateArchiveContent());
+            monthSelect.addEventListener('change', () => updateArchiveContent());
+            
+            function updateArchiveContent() {
+                const year = yearSelect.value;
+                const month = monthSelect.value;
+                // Implementation would fetch and display content for selected year/month
+                console.log(`Updating content for ${month} ${year}`);
+            }
+            
+            // Search functionality
+            const searchInput = document.querySelector('input[type="search"]');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value;
+                // Implementation would filter displayed content based on search term
+                console.log(`Searching for: ${searchTerm}`);
+            });
+        });
+    </script>
+</body>
+</html>
