@@ -1,0 +1,25 @@
+# .github/workflows/update.yml
+name: Daily Content Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run at midnight UTC
+  workflow_dispatch:      # Allow manual triggers
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Update index with today's content
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          if [ -f "archive/$TODAY.html" ]; then
+            cp "archive/$TODAY.html" "index.html"
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add index.html
+            git commit -m "Update index for $TODAY"
+            git push
+          fi
