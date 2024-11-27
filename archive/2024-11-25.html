@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Munster - Digital Nomad Daily</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D3748;
+            --accent: #805AD5;
+            --text: #E2E8F0;
+            --highlight: #4FD1C5;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .section-card {
+            background-color: rgba(44, 82, 130, 0.2);
+            border-radius: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accent-button {
+            background-color: var(--accent);
+            color: white;
+            transition: all 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        .accent-button:hover {
+            background-color: #6B46C1;
+            transform: translateY(-1px);
+        }
+
+        .podcast-player {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .community-card {
+            border: 1px solid var(--highlight);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="text-center py-8">
+        <h1 class="text-4xl font-bold mb-2">✈️ Daily Nomad Digest</h1>
+        <p class="text-xl text-gray-400">Your daily dose of remote work wisdom</p>
+        <p class="text-gray-400 mt-2">[DATE HERE]</p>
+        <div class="flex justify-center gap-4 mt-4">
+            <a href="/archives" class="accent-button">📚 Archives</a>
+            <button onclick="goToRandomDay()" class="accent-button">🎲 Random Day</button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-4xl">
+        <!-- COPY FROM HERE FOR NEW DAYS -->
+        
+        <!-- Wanderlust Quote -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🌎 Today's Wanderlust Quote</h2>
+            <blockquote class="text-xl italic">
+                "This is the 11/25/24 post"
+                <footer class="text-sm mt-2">- [AUTHOR HERE]</footer>
+            </blockquote>
+        </section>
+
+        <!-- Educational Section -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">📚 Daily Learning</h2>
+            <h3 class="text-xl mb-2">[TITLE HERE]</h3>
+            <p class="mb-4">[CONTENT HERE]</p>
+            <a href="[LINK HERE]" class="accent-button inline-block">Read Full Guide</a>
+        </section>
+
+        <!-- Job Board -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">💼 Remote Job Boards</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="[LINK]" class="accent-button text-center flex items-center justify-center gap-2">
+                    <span>We Work Remotely</span>
+                    <span class="text-sm bg-purple-700 px-2 py-1 rounded">Featured</span>
+                </a>
+                <a href="[LINK]" class="accent-button text-center">Remote.co</a>
+                <a href="[LINK]" class="accent-button text-center">FlexJobs</a>
+                <a href="[LINK]" class="accent-button text-center">Remote OK</a>
+            </div>
+        </section>
+
+        <!-- Marketing Tip -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🎯 Marketing Tip of the Day</h2>
+            <h3 class="text-xl mb-2">[TIP TITLE HERE]</h3>
+            <p class="mb-4">[TIP CONTENT HERE]</p>
+            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg mb-4">
+                <h4 class="font-semibold mb-2">Quick Tips:</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>[QUICK TIP 1]</li>
+                    <li>[QUICK TIP 2]</li>
+                    <li>[QUICK TIP 3]</li>
+                </ul>
+            </div>
+            <a href="[LINK HERE]" class="accent-button inline-block">Get Full Strategy</a>
+        </section>
+
+        <!-- Podcast -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🎧 Podcast of the Day</h2>
+            <div class="podcast-player">
+                <h3 class="text-xl mb-2">[PODCAST TITLE HERE]</h3>
+                <p class="text-gray-400 mb-4">[EPISODE INFO HERE]</p>
+                <a href="[PODCAST LINK]" class="accent-button inline-block">Listen Now</a>
+            </div>
+        </section>
+
+        <!-- Tool of the Day -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🛠️ Tool of the Day</h2>
+            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
+                <h3 class="text-xl mb-2">[TOOL NAME HERE]</h3>
+                <p class="text-gray-300 mb-4">[TOOL DESCRIPTION HERE]</p>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <span class="text-sm text-gray-400">Category</span>
+                        <p>[CATEGORY HERE]</p>
+                    </div>
+                    <div>
+                        <span class="text-sm text-gray-400">Pricing</span>
+                        <p>[PRICING HERE]</p>
+                    </div>
+                </div>
+                <a href="[TOOL LINK]" class="accent-button block text-center">Try Now</a>
+            </div>
+        </section>
+
+        <!-- Self Care -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🧘‍♂️ Self Care Corner</h2>
+            <h3 class="text-xl mb-2">[SELF CARE TITLE HERE]</h3>
+            <p class="mb-4">[INTRO TEXT HERE]</p>
+            <div class="space-y-4">
+                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">[SECTION 1 TITLE]</h4>
+                    <p>[SECTION 1 CONTENT]</p>
+                </div>
+                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">[SECTION 2 TITLE]</h4>
+                    <p>[SECTION 2 CONTENT]</p>
+                </div>
+                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">[SECTION 3 TITLE]</h4>
+                    <p>[SECTION 3 CONTENT]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skill Building -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🎓 Skill Building</h2>
+            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
+                <h3 class="text-xl mb-2">[SKILL TITLE HERE]</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <span class="text-sm text-gray-400">Platform</span>
+                        <p>[PLATFORM HERE]</p>
+                    </div>
+                    <div>
+                        <span class="text-sm text-gray-400">Duration</span>
+                        <p>[DURATION HERE]</p>
+                    </div>
+                    <div>
+                        <span class="text-sm text-gray-400">Level</span>
+                        <p>[LEVEL HERE]</p>
+                    </div>
+                    <div>
+                        <span class="text-sm text-gray-400">Certificate</span>
+                        <p>[YES/NO]</p>
+                    </div>
+                </div>
+                <a href="[COURSE LINK]" class="accent-button block text-center">Start Learning</a>
+            </div>
+        </section>
+
+        <!-- Community Spotlight -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">👥 Community Spotlight</h2>
+            <div class="community-card p-4 rounded-lg">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl">
+                        [EMOJI]
+                    </div>
+                    <div>
+                        <h3 class="text-xl">[COMMUNITY NAME]</h3>
+                        <p class="text-gray-400">[PLATFORM]</p>
+                    </div>
+                </div>
+                <p class="mb-4">[COMMUNITY DESCRIPTION]</p>
+                <a href="[COMMUNITY LINK]" class="accent-button block text-center">Join Community</a>
+            </div>
+        </section>
+
+        <!-- Book of the Day -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">📖 Book of the Day</h2>
+            <div class="flex gap-6">
+                <div class="w-1/3">
+                    <div class="aspect-[2/3] bg-gray-700 rounded-lg"></div>
+                </div>
+                <div class="w-2/3">
+                    <h3 class="text-xl mb-2">[BOOK TITLE]</h3>
+                    <p class="text-gray-400 mb-2">By [AUTHOR]</p>
+                    <p class="mb-4">[BOOK DESCRIPTION]</p>
+                    <a href="[BOOK LINK]" class="accent-button inline-block">Read Summary</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video of the Day -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold mb-4">🎬 Video of the Day</h2>
+            <div class="relative">
+                <img src="/api/placeholder/640/360" alt="Video thumbnail" class="w-full rounded-lg mb-4"/>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <a href="[VIDEO LINK]" class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                        <span class="text-2xl">▶️</span>
+                    </a>
+                </div>
+            </div>
+            <h3 class="text-xl mb-2">[VIDEO TITLE]</h3>
+            <p class="text-gray-400 mb-4">[CREATOR] • [DURATION]</p>
+            <a href="[VIDEO LINK]" class="accent-button inline-block">Watch Now</a>
+        </section>
+        
+        <!-- COPY UNTIL HERE FOR NEW DAYS -->
+    </main>
+
+    <footer class="text-center py-8 text-gray-400">
+        <p>© 2024 Go Munster - Updated daily with fresh nomadic goodness</p>
+    </footer>
+
+    <script>
+        function goToRandomDay() {
+            // Get list of archive days and redirect to a random one
+            // This will be implemented when we create the archive system
+            console.log('Random day feature coming soon!');
+        }
+    </script>
+</body>
+</html>
