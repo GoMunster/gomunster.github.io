@@ -244,12 +244,12 @@
         <!-- Video of the Day -->
         <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎬 Video of the Day</h2>
-            <div class="relative aspect-video mb-4" id="video-container">
+            <div class="relative w-full h-0 pb-[56.25%] mb-4" id="video-container">
                 <!-- Thumbnail with play button -->
                 <img 
                     src="https://img.youtube.com/vi/1ziSDBlK5lY/maxresdefault.jpg" 
                     alt="Study with Me for 4 Hours" 
-                    class="w-full h-full object-cover rounded-lg"
+                    class="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
                 />
                 <button 
                     onclick="loadYouTubeVideo('1ziSDBlK5lY')" 
@@ -280,17 +280,18 @@
         }
     </script>
     <script>
-        function loadYouTubeVideo(videoId) {
+         function loadYouTubeVideo(videoId) {
         const container = document.getElementById('video-container');
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
-        iframe.setAttribute('title', 'YouTube video player');
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.classList.add('w-full', 'h-full', 'absolute', 'inset-0', 'rounded-lg');
-        container.innerHTML = '';
-        container.appendChild(iframe);
+        container.innerHTML = `
+            <iframe
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+                allowfullscreen
+                class="absolute top-0 left-0 w-full h-full rounded-lg"
+            ></iframe>
+        `;
     }
     </script>
 </body>
