@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go Munster - Daily Digital Nomad Inspiration</title>
+    <title>Go Munster - Digital Nomad Daily</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
@@ -23,6 +23,8 @@
             background-color: rgba(44, 82, 130, 0.2);
             border-radius: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
         }
         
         .section-card:hover {
@@ -34,6 +36,8 @@
             background-color: var(--accent);
             color: white;
             transition: all 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
         }
         
         .accent-button:hover {
@@ -56,192 +60,192 @@
     <header class="text-center py-8">
         <h1 class="text-4xl font-bold mb-2">✈️ Daily Nomad Digest</h1>
         <p class="text-xl text-gray-400">Your daily dose of remote work wisdom</p>
+        <p class="text-gray-400 mt-2">[DATE HERE]</p>
         <div class="flex justify-center gap-4 mt-4">
-            <button class="accent-button px-4 py-2 rounded-lg">📚 Archives</button>
-            <button class="accent-button px-4 py-2 rounded-lg">🎲 Random Day</button>
+            <a href="/archives" class="accent-button">📚 Archives</a>
+            <button onclick="goToRandomDay()" class="accent-button">🎲 Random Day</button>
         </div>
     </header>
 
     <main class="container mx-auto px-4 max-w-4xl">
+        <!-- COPY FROM HERE FOR NEW DAYS -->
+        
         <!-- Wanderlust Quote -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🌎 Today's Wanderlust Quote</h2>
             <blockquote class="text-xl italic">
-                "Life is either a daring adventure or nothing at all." - Helen Keller
+                "This is the post for today! 11/26/24"
+                <footer class="text-sm mt-2">- [AUTHOR HERE]</footer>
             </blockquote>
         </section>
 
         <!-- Educational Section -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">📚 Daily Learning</h2>
-            <h3 class="text-xl mb-2">Time Zone Management for Remote Teams</h3>
-            <p class="mb-4">Master the art of coordinating across multiple time zones. Learn about time zone overlaps, asynchronous communication, and tools that make global collaboration seamless.</p>
-            <button class="accent-button px-4 py-2 rounded-lg">Read Full Guide</button>
+            <h3 class="text-xl mb-2">[TITLE HERE]</h3>
+            <p class="mb-4">[CONTENT HERE]</p>
+            <a href="[LINK HERE]" class="accent-button inline-block">Read Full Guide</a>
         </section>
 
         <!-- Job Board -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">💼 Remote Job Boards</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="#" class="accent-button p-4 rounded-lg text-center flex items-center justify-center gap-2">
+                <a href="[LINK]" class="accent-button text-center flex items-center justify-center gap-2">
                     <span>We Work Remotely</span>
                     <span class="text-sm bg-purple-700 px-2 py-1 rounded">Featured</span>
                 </a>
-                <a href="#" class="accent-button p-4 rounded-lg text-center">Remote.co</a>
-                <a href="#" class="accent-button p-4 rounded-lg text-center">FlexJobs</a>
-                <a href="#" class="accent-button p-4 rounded-lg text-center">Remote OK</a>
+                <a href="[LINK]" class="accent-button text-center">Remote.co</a>
+                <a href="[LINK]" class="accent-button text-center">FlexJobs</a>
+                <a href="[LINK]" class="accent-button text-center">Remote OK</a>
             </div>
         </section>
 
         <!-- Marketing Tip -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎯 Marketing Tip of the Day</h2>
-            <h3 class="text-xl mb-2">Instagram Reels Strategy</h3>
-            <p class="mb-4">Boost your personal brand with strategic Reels content. Today's focus: Creating engaging hooks in the first 3 seconds.</p>
+            <h3 class="text-xl mb-2">[TIP TITLE HERE]</h3>
+            <p class="mb-4">[TIP CONTENT HERE]</p>
             <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg mb-4">
                 <h4 class="font-semibold mb-2">Quick Tips:</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li>Start with a question or challenge</li>
-                    <li>Use trending audio strategically</li>
-                    <li>Show the end result first</li>
+                    <li>[QUICK TIP 1]</li>
+                    <li>[QUICK TIP 2]</li>
+                    <li>[QUICK TIP 3]</li>
                 </ul>
             </div>
-            <button class="accent-button px-4 py-2 rounded-lg">Get Full Strategy</button>
+            <a href="[LINK HERE]" class="accent-button inline-block">Get Full Strategy</a>
         </section>
 
         <!-- Podcast -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎧 Podcast of the Day</h2>
             <div class="podcast-player">
-                <h3 class="text-xl mb-2">Digital Nomad Success Stories</h3>
-                <p class="text-gray-400 mb-4">Episode 127: Building a Location-Independent Business</p>
-                <div class="flex items-center gap-4">
-                    <button class="accent-button p-2 rounded-full">▶️</button>
-                    <div class="h-1 flex-grow bg-gray-700 rounded">
-                        <div class="h-full w-1/3 bg-purple-500 rounded"></div>
-                    </div>
-                    <span class="text-sm">45:00</span>
-                </div>
+                <h3 class="text-xl mb-2">[PODCAST TITLE HERE]</h3>
+                <p class="text-gray-400 mb-4">[EPISODE INFO HERE]</p>
+                <a href="[PODCAST LINK]" class="accent-button inline-block">Listen Now</a>
             </div>
         </section>
 
         <!-- Tool of the Day -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🛠️ Tool of the Day</h2>
             <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                <h3 class="text-xl mb-2">Notion</h3>
-                <p class="text-gray-300 mb-4">All-in-one workspace that combines notes, docs, and project management.</p>
+                <h3 class="text-xl mb-2">[TOOL NAME HERE]</h3>
+                <p class="text-gray-300 mb-4">[TOOL DESCRIPTION HERE]</p>
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <span class="text-sm text-gray-400">Category</span>
-                        <p>Productivity</p>
+                        <p>[CATEGORY HERE]</p>
                     </div>
                     <div>
                         <span class="text-sm text-gray-400">Pricing</span>
-                        <p>Freemium</p>
+                        <p>[PRICING HERE]</p>
                     </div>
                 </div>
-                <button class="accent-button px-4 py-2 rounded-lg w-full">Try Notion</button>
+                <a href="[TOOL LINK]" class="accent-button block text-center">Try Now</a>
             </div>
         </section>
 
         <!-- Self Care -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🧘‍♂️ Self Care Corner</h2>
-            <h3 class="text-xl mb-2">Mindful Morning Routine</h3>
-            <p class="mb-4">Start your remote workday right with these mindful practices:</p>
+            <h3 class="text-xl mb-2">[SELF CARE TITLE HERE]</h3>
+            <p class="mb-4">[INTRO TEXT HERE]</p>
             <div class="space-y-4">
                 <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">🌅 Morning Meditation</h4>
-                    <p>5-minute guided meditation for focus and clarity</p>
+                    <h4 class="font-semibold mb-2">[SECTION 1 TITLE]</h4>
+                    <p>[SECTION 1 CONTENT]</p>
                 </div>
                 <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">🧘‍♀️ Desk Stretches</h4>
-                    <p>Quick stretching routine for better posture</p>
+                    <h4 class="font-semibold mb-2">[SECTION 2 TITLE]</h4>
+                    <p>[SECTION 2 CONTENT]</p>
                 </div>
                 <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">🥗 Healthy Breakfast</h4>
-                    <p>Energy-boosting breakfast ideas for digital nomads</p>
+                    <h4 class="font-semibold mb-2">[SECTION 3 TITLE]</h4>
+                    <p>[SECTION 3 CONTENT]</p>
                 </div>
             </div>
         </section>
 
         <!-- Skill Building -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎓 Skill Building</h2>
             <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                <h3 class="text-xl mb-2">SEO Fundamentals</h3>
+                <h3 class="text-xl mb-2">[SKILL TITLE HERE]</h3>
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <span class="text-sm text-gray-400">Platform</span>
-                        <p>Coursera</p>
+                        <p>[PLATFORM HERE]</p>
                     </div>
                     <div>
                         <span class="text-sm text-gray-400">Duration</span>
-                        <p>6 weeks</p>
+                        <p>[DURATION HERE]</p>
                     </div>
                     <div>
                         <span class="text-sm text-gray-400">Level</span>
-                        <p>Beginner</p>
+                        <p>[LEVEL HERE]</p>
                     </div>
                     <div>
                         <span class="text-sm text-gray-400">Certificate</span>
-                        <p>Yes</p>
+                        <p>[YES/NO]</p>
                     </div>
                 </div>
-                <button class="accent-button px-4 py-2 rounded-lg w-full">Start Learning</button>
+                <a href="[COURSE LINK]" class="accent-button block text-center">Start Learning</a>
             </div>
         </section>
 
         <!-- Community Spotlight -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">👥 Community Spotlight</h2>
             <div class="community-card p-4 rounded-lg">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl">
-                        👩‍💻
+                        [EMOJI]
                     </div>
                     <div>
-                        <h3 class="text-xl">Digital Nomad Girls</h3>
-                        <p class="text-gray-400">Facebook Community</p>
+                        <h3 class="text-xl">[COMMUNITY NAME]</h3>
+                        <p class="text-gray-400">[PLATFORM]</p>
                     </div>
                 </div>
-                <p class="mb-4">A supportive community of 50,000+ female digital nomads sharing tips, opportunities, and inspiration.</p>
-                <button class="accent-button px-4 py-2 rounded-lg w-full">Join Community</button>
+                <p class="mb-4">[COMMUNITY DESCRIPTION]</p>
+                <a href="[COMMUNITY LINK]" class="accent-button block text-center">Join Community</a>
             </div>
         </section>
 
         <!-- Book of the Day -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">📖 Book of the Day</h2>
             <div class="flex gap-6">
                 <div class="w-1/3">
                     <div class="aspect-[2/3] bg-gray-700 rounded-lg"></div>
                 </div>
                 <div class="w-2/3">
-                    <h3 class="text-xl mb-2">Remote: Office Not Required</h3>
-                    <p class="text-gray-400 mb-2">By Jason Fried & DHH</p>
-                    <p class="mb-4">The definitive guide to working remotely and building a successful distributed team.</p>
-                    <button class="accent-button px-4 py-2 rounded-lg">Read Summary</button>
+                    <h3 class="text-xl mb-2">[BOOK TITLE]</h3>
+                    <p class="text-gray-400 mb-2">By [AUTHOR]</p>
+                    <p class="mb-4">[BOOK DESCRIPTION]</p>
+                    <a href="[BOOK LINK]" class="accent-button inline-block">Read Summary</a>
                 </div>
             </div>
         </section>
 
         <!-- Video of the Day -->
-        <section class="section-card p-6 mb-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold mb-4">🎬 Video of the Day</h2>
             <div class="relative">
                 <img src="/api/placeholder/640/360" alt="Video thumbnail" class="w-full rounded-lg mb-4"/>
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <button class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                    <a href="[VIDEO LINK]" class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
                         <span class="text-2xl">▶️</span>
-                    </button>
+                    </a>
                 </div>
             </div>
-            <h3 class="text-xl mb-2">5 Tax Tips for Digital Nomads</h3>
-            <p class="text-gray-400 mb-4">By Nomad Tax Guide • 12:34</p>
-            <button class="accent-button px-4 py-2 rounded-lg">Watch Now</button>
+            <h3 class="text-xl mb-2">[VIDEO TITLE]</h3>
+            <p class="text-gray-400 mb-4">[CREATOR] • [DURATION]</p>
+            <a href="[VIDEO LINK]" class="accent-button inline-block">Watch Now</a>
         </section>
+        
+        <!-- COPY UNTIL HERE FOR NEW DAYS -->
     </main>
 
     <footer class="text-center py-8 text-gray-400">
@@ -249,17 +253,11 @@
     </footer>
 
     <script>
-        // Function to handle random day navigation
         function goToRandomDay() {
-            const days = 365;
-            const randomDay = Math.floor(Math.random() * days) + 1;
-            console.log(`Navigating to day ${randomDay}`);
+            // Get list of archive days and redirect to a random one
+            // This will be implemented when we create the archive system
+            console.log('Random day feature coming soon!');
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const randomButton = document.querySelector('button:nth-child(2)');
-            randomButton.addEventListener('click', goToRandomDay);
-        });
     </script>
 </body>
 </html>
