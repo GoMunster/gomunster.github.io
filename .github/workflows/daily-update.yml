@@ -1,0 +1,41 @@
+# .github/workflows/daily-update.yml
+name: Daily Content Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run at midnight UTC
+  workflow_dispatch:      # Allows manual trigger from GitHub UI
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      
+      - name: Update index with today's content
+        run: |
+          TODAY_UTC=$(date +%Y-%m-%d)
+          TODAY_ET=$(TZ='America/New_York' date +%Y-%m-%d)
+          
+          echo "Checking for files:"
+          echo "UTC date: archive/$TODAY_UTC.html"
+          echo "ET date: archive/$TODAY_ET.html"
+          
+          if [ -f "archive/$TODAY_ET.html" ]; then
+            cp "archive/$TODAY_ET.html" "index.html"
+            USE_DATE=$TODAY_ET
+          elif [ -f "archive/$TODAY_UTC.html" ]; then
+            cp "archive/$TODAY_UTC.html" "index.html"
+            USE_DATE=$TODAY_UTC
+          else
+            echo "No content found for either date"
+            exit 1
+          fi
+          
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+          git commit -m "Update index for $USE_DATE"
+          git push
