@@ -118,14 +118,97 @@
         </section>
 
         <!-- Podcast -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🎧 Podcast of the Day</h2>
-            <div class="podcast-player">
-                <h3 class="text-xl mb-2">[PODCAST TITLE HERE]</h3>
-                <p class="text-gray-400 mb-4">[EPISODE INFO HERE]</p>
-                <a href="[PODCAST LINK]" class="accent-button inline-block">Listen Now</a>
+<section class="section-card">
+    <h2 class="text-2xl font-semibold mb-4">🎧 Podcast of the Day</h2>
+    <div class="podcast-player">
+        <h3 class="text-xl mb-2" id="podcast-title">[PODCAST TITLE HERE]</h3>
+        <p class="text-gray-400 mb-4" id="podcast-info">[EPISODE INFO HERE]</p>
+        
+        <!-- Custom Audio Player -->
+        <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg mb-4">
+            <audio id="podcast-audio" class="hidden">
+                <source src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <!-- Custom Controls -->
+            <div class="flex items-center gap-4 mb-4">
+                <button id="playPauseBtn" class="accent-button" onclick="togglePlay()">
+                    ▶️ Play
+                </button>
+                
+                <!-- Progress Bar -->
+                <div class="flex-grow bg-gray-700 rounded-full h-2 relative">
+                    <div id="progress-bar" class="bg-purple-500 h-full rounded-full" style="width: 0%"></div>
+                </div>
+                
+                <!-- Time Display -->
+                <span id="time-display" class="text-sm">0:00 / 0:00</span>
             </div>
-        </section>
+            
+            <!-- Volume Control -->
+            <div class="flex items-center gap-2">
+                <span>🔊</span>
+                <input type="range" id="volume-slider" class="w-24" min="0" max="100" value="100">
+            </div>
+        </div>
+        
+        <a href="#" id="podcast-link" class="accent-button inline-block">View Episode</a>
+    </div>
+</section>
+
+<script>
+    // Podcast Player functionality
+    const audio = document.getElementById('podcast-audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const progressBar = document.getElementById('progress-bar');
+    const timeDisplay = document.getElementById('time-display');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.textContent = '⏸️ Pause';
+        } else {
+            audio.pause();
+            playPauseBtn.textContent = '▶️ Play';
+        }
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        seconds = Math.floor(seconds % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Update progress bar and time display
+    audio.addEventListener('timeupdate', () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${progress}%`;
+        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    });
+
+    // Volume control
+    volumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value / 100;
+    });
+
+    // Click on progress bar to seek
+    progressBar.parentElement.addEventListener('click', (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pos * audio.duration;
+    });
+
+    // Function to load new podcast
+    function loadPodcast(title, info, audioUrl, link) {
+        document.getElementById('podcast-title').textContent = title;
+        document.getElementById('podcast-info').textContent = info;
+        document.getElementById('podcast-link').href = link;
+        audio.src = https://podcasts.apple.com/us/podcast/how-to-work-with-your-adhd-to-boost-focus-and-productivity/id1569923210?i=1000673280580;
+        playPauseBtn.textContent = '▶️ Play';
+    }
+</script>
 
         <!-- Tool of the Day -->
         <section class="section-card">
