@@ -1,297 +1,487 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go Munster - Digital Nomad Daily</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <meta name="description" content="Daily curated content for digital nomads and remote workers">
+    <title>Digital Nomad Daily Essentials</title>
     <style>
         :root {
-            --primary: #2D3748;
-            --accent: #805AD5;
-            --text: #E2E8F0;
-            --highlight: #4FD1C5;
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2d3436;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --highlight: #FF6B6B;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --background: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-color: #f0f0f0;
+            --border-color: #404040;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --highlight: #FF6B6B;
+        }
+
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            background-color: var(--primary);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            background: var(--background);
+            color: var(--text-color);
         }
         
-        .section-card {
-            background-color: rgba(44, 82, 130, 0.2);
-            border-radius: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 3rem;
             margin-bottom: 2rem;
-            padding: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
         
-        .section-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        section {
+            background: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
         
-        .accent-button {
-            background-color: var(--accent);
-            color: white;
-            transition: all 0.2s;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-        }
-        
-        .accent-button:hover {
-            background-color: #6B46C1;
-            transform: translateY(-1px);
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .podcast-player {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 0.5rem;
-            padding: 1rem;
+        h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+
+        .media-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .media-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .book-container {
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        
+        .book-image {
+            flex: 0 0 200px;
+            max-width: 200px;
+        }
+        
+        .book-details {
+            flex: 1;
+        }
+
+        .gadget-container {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .gadget-image {
+            flex: 0 0 200px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .blog-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .blog-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
         }
 
         .community-card {
-            border: 1px solid var(--highlight);
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .community-image {
+            flex: 0 0 150px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .tip {
+            background: var(--secondary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .resource {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin: 1rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+            text-decoration: none;
+        }
+
+        .social-share-container {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .social-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .social-button:hover {
+            transform: scale(1.1) translateX(5px);
+        }
+
+        .twitter { background: #1DA1F2; }
+        .facebook { background: #4267B2; }
+        .linkedin { background: #0077b5; }
+
+        .social-button svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .social-share-container {
+                position: fixed;
+                left: 0;
+                top: auto;
+                bottom: 0;
+                right: 0;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                background: var(--card-bg);
+                padding: 10px;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .social-button:hover {
+                transform: scale(1.1);
+            }
+
+            body {
+                margin-bottom: 70px;
+            }
+
+            .book-container,
+            .gadget-container,
+            .community-card {
+                flex-direction: column;
+            }
+
+            .book-image,
+            .gadget-image,
+            .community-image {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <header class="text-center py-8">
-        <h1 class="text-4xl font-bold mb-2">✈️ Daily Nomad Digest</h1>
-        <p class="text-xl text-gray-400">Your daily dose of remote work wisdom</p>
-        <p class="text-gray-400 mt-2">November 27, 2024</p>
-        <div class="flex justify-center gap-4 mt-4">
-            <a href="/archive" class="accent-button">📚 Archives</a>
-            <button onclick="goToRandomDay()" class="accent-button">🎲 Random Day</button>
+<body>
+    <button class="theme-switch" onclick="toggleTheme()">🌓</button>
+
+    <!-- Social Share Buttons -->
+    <div class="social-share-container">
+        <button class="social-button twitter" onclick="shareOn('twitter')" aria-label="Share on Twitter">
+            <svg viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+        </button>
+        <button class="social-button facebook" onclick="shareOn('facebook')" aria-label="Share on Facebook">
+            <svg viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+        </button>
+        <button class="social-button linkedin" onclick="shareOn('linkedin')" aria-label="Share on LinkedIn">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+            </svg>
+        </button>
+    </div>
+
+    <h1>✨ DIGITAL NOMAD DAILY</h1>
+
+    <section>
+        <h2>🎯 TODAY'S FOCUS</h2>
+        <p>Stop procrastinating on your side hustle. The best time to start was yesterday. The second best time is right fucking now.</p>
+    </section>
+
+    <section>
+        <h2>🎥 VIDEO OF THE DAY</h2>
+        <div class="media-container">
+            <!-- Replace VIDEO_ID with your YouTube video ID -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-    </header>
+        <h3>How I Built a 6-Figure Business While Traveling</h3>
+        <p>Learn the exact steps I took to build a location-independent business that generates consistent income.</p>
+    </section>
 
-    <main class="container mx-auto px-4 max-w-4xl">
-        <!-- COPY FROM HERE FOR NEW DAYS -->
-        
-        <!-- Wanderlust Quote -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🌎 Today's Wanderlust Quote</h2>
-            <blockquote class="text-xl italic">
-                "This is the post for today! 11/26/24"
-                <footer class="text-sm mt-2">- [AUTHOR HERE]</footer>
-            </blockquote>
-        </section>
+    <section>
+        <h2>🎧 PODCAST OF THE DAY</h2>
+        <div class="media-container">
+            <!-- Replace PODCAST_URL with your podcast embed URL -->
+            <iframe src="PODCAST_URL" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <h3>Digital Nomad Success Stories</h3>
+        <p>Inspiring interviews with successful location-independent entrepreneurs.</p>
+    </section>
 
-        <!-- Educational Section -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">📚 Daily Learning</h2>
-            <h3 class="text-xl mb-2">[TITLE HERE]</h3>
-            <p class="mb-4">[CONTENT HERE]</p>
-            <a href="[LINK HERE]" class="accent-button inline-block">Read Full Guide</a>
-        </section>
-
-        <!-- Job Board -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">💼 Remote Job Boards</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="[LINK]" class="accent-button text-center flex items-center justify-center gap-2">
-                    <span>We Work Remotely</span>
-                    <span class="text-sm bg-purple-700 px-2 py-1 rounded">Featured</span>
-                </a>
-                <a href="[LINK]" class="accent-button text-center">Remote.co</a>
-                <a href="[LINK]" class="accent-button text-center">FlexJobs</a>
-                <a href="[LINK]" class="accent-button text-center">Remote OK</a>
+    <section>
+        <h2>📚 BOOK OF THE DAY</h2>
+        <div class="book-container">
+            <div class="book-image">
+                <img src="/api/placeholder/200/300" alt="Book cover" style="width: 100%; height: auto;">
             </div>
-        </section>
-
-        <!-- Marketing Tip -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🎯 Marketing Tip of the Day</h2>
-            <h3 class="text-xl mb-2">[TIP TITLE HERE]</h3>
-            <p class="mb-4">[TIP CONTENT HERE]</p>
-            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg mb-4">
-                <h4 class="font-semibold mb-2">Quick Tips:</h4>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>[QUICK TIP 1]</li>
-                    <li>[QUICK TIP 2]</li>
-                    <li>[QUICK TIP 3]</li>
-                </ul>
+            <div class="book-details">
+                <h3>The 4-Hour Work Week</h3>
+                <p><strong>Author:</strong> Timothy Ferriss</p>
+                <p>Escape the 9-5, live anywhere, and join the new rich. The blueprint for digital nomad success.</p>
+                <a href="#" class="cta-button">Get it on Amazon</a>
             </div>
-            <a href="[LINK HERE]" class="accent-button inline-block">Get Full Strategy</a>
-        </section>
+        </div>
+    </section>
 
-        <!-- Podcast -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🎧 Podcast of the Day</h2>
-            <div class="podcast-player">
-                <h3 class="text-xl mb-2">[PODCAST TITLE HERE]</h3>
-                <p class="text-gray-400 mb-4">[EPISODE INFO HERE]</p>
-                <a href="[PODCAST LINK]" class="accent-button inline-block">Listen Now</a>
+    <section>
+        <h2>📖 SKILL OF THE DAY</h2>
+        <div class="resource">
+            <h3>Learn Python for Digital Nomads</h3>
+            <p>Master Python programming and unlock high-paying remote work opportunities. This Coursera specialization is perfect for aspiring digital nomads who want to break into tech.</p>
+            <p><strong>What you'll learn:</strong></p>
+            <ul>
+                <li>Python fundamentals</li>
+                <li>Web development basics</li>
+                <li>Data analysis for business</li>
+                <li>Automation techniques</li>
+            </ul>
+            <a href="#" class="cta-button">Start Learning on Coursera</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>🎮 FUN TRAVEL/WORK GADGET OF THE DAY</h2>
+        <div class="gadget-container">
+            <div class="gadget-image">
+                <img src="/api/placeholder/200/200" alt="Gadget of the day" style="width: 100%; height: auto;">
             </div>
-        </section>
-
-        <!-- Tool of the Day -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🛠️ Tool of the Day</h2>
-            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                <h3 class="text-xl mb-2">[TOOL NAME HERE]</h3>
-                <p class="text-gray-300 mb-4">[TOOL DESCRIPTION HERE]</p>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <span class="text-sm text-gray-400">Category</span>
-                        <p>[CATEGORY HERE]</p>
-                    </div>
-                    <div>
-                        <span class="text-sm text-gray-400">Pricing</span>
-                        <p>[PRICING HERE]</p>
-                    </div>
-                </div>
-                <a href="[TOOL LINK]" class="accent-button block text-center">Try Now</a>
+            <div class="gadget-details">
+                <h3>Portable Second Monitor</h3>
+                <p>Boost your productivity anywhere with this ultra-slim portable monitor. Perfect for digital nomads who need extra screen real estate without the bulk.</p>
+                <p><strong>Why we love it:</strong> Weighs just 1.3 pounds, USB-C powered, and works with any laptop.</p>
+                <a href="#" class="cta-button">Check it out on Amazon</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Self Care -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🧘‍♂️ Self Care Corner</h2>
-            <h3 class="text-xl mb-2">[SELF CARE TITLE HERE]</h3>
-            <p class="mb-4">[INTRO TEXT HERE]</p>
-            <div class="space-y-4">
-                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">[SECTION 1 TITLE]</h4>
-                    <p>[SECTION 1 CONTENT]</p>
-                </div>
-                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">[SECTION 2 TITLE]</h4>
-                    <p>[SECTION 2 CONTENT]</p>
-                </div>
-                <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">[SECTION 3 TITLE]</h4>
-                    <p>[SECTION 3 CONTENT]</p>
-                </div>
+    <section>
+        <h2>✍️ BLOG OF THE DAY</h2>
+        <article class="blog-content">
+            <h3>How I Found My Remote Work Rhythm in Bali</h3>
+            <p class="blog-date">December 5, 2024</p>
+            <img src="/api/placeholder/800/400" alt="Working from Bali" class="blog-image">
+            <p>When I first landed in Bali, I had no idea how to balance the island life with my work commitments. Three months later, I've cracked the code...</p>
+            <a href="#" class="cta-button">Read More</a>
+        </article>
+    </section>
+
+    <section>
+        <h2>💡 REMOTE WORK TIP OF THE DAY</h2>
+        <div class="tip">
+            <p>Set up a proper morning routine. Your morning sets the tone for your entire workday. Create a ritual that energizes you - whether it's meditation, exercise, or simply enjoying your coffee in peace.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔧 DIGITAL NOMAD TOOLKIT</h2>
+        <div class="resource">
+            <p><strong>Essential Tool:</strong> NordVPN - Because public WiFi in beach cafes isn't exactly Fort Knox.</p>
+            <p><strong>Why it matters:</strong> Secure your sensitive work data while hopping between coworking spaces and cafes.</p>
+            <a href="#" class="cta-button">Get Protected Now</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>💼 REMOTE JOB OF THE DAY</h2>
+        <div class="resource">
+            <h3>Senior Full Stack Developer</h3>
+            <p><strong>Company:</strong> RemoteFirst Inc.</p>
+            <p><strong>Salary Range:</strong> $120,000 - $160,000</p>
+            <p><strong>Perks:</strong> Fully remote, flexible hours, 4-day workweek</p>
+            <p><strong>Requirements:</strong> 5+ years experience, strong JavaScript skills</p>
+            <a href="#" class="cta-button">Apply Now</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>🤝 COMMUNITY SPOTLIGHT</h2>
+        <div class="community-card">
+            <div class="community-image">
+                <img src="/api/placeholder/150/150" alt="Community spotlight" style="width: 100%; height: auto;">
             </div>
-        </section>
-
-        <!-- Skill Building -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🎓 Skill Building</h2>
-            <div class="bg-purple-900 bg-opacity-50 p-4 rounded-lg">
-                <h3 class="text-xl mb-2">[SKILL TITLE HERE]</h3>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <span class="text-sm text-gray-400">Platform</span>
-                        <p>[PLATFORM HERE]</p>
-                    </div>
-                    <div>
-                        <span class="text-sm text-gray-400">Duration</span>
-                        <p>[DURATION HERE]</p>
-                    </div>
-                    <div>
-                        <span class="text-sm text-gray-400">Level</span>
-                        <p>[LEVEL HERE]</p>
-                    </div>
-                    <div>
-                        <span class="text-sm text-gray-400">Certificate</span>
-                        <p>[YES/NO]</p>
-                    </div>
-                </div>
-                <a href="[COURSE LINK]" class="accent-button block text-center">Start Learning</a>
+            <div class="community-details">
+                <h3>Digital Nomads Portugal</h3>
+                <p>A thriving community of 5,000+ remote workers based in Portugal. Weekly meetups, skill-sharing sessions, and the best tips for navigating the Portuguese D7 visa process.</p>
+                <a href="#" class="cta-button">Join Community</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Community Spotlight -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">👥 Community Spotlight</h2>
-            <div class="community-card p-4 rounded-lg">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center overflow-hidden">
-                        <img 
-                            src="images/community-icons/DigitaNomadsFB.png" 
-                            alt="Community Icon" 
-                            class="w-full h-full object-cover"
-    />
-</div>
-                    <div>
-                        <h3 class="text-xl">Digital Nomads Around the World</h3>
-                        <p class="text-gray-400">Facebook</p>
-                    </div>
-                </div>
-                <p class="mb-4">This group is dedicated to the thriving Digital Nomad community. It's a place to share travel advice, remote job opportunities, visa information, job tips, the best places to work, and anything related to the Digital Nomad scene.</p>
-                <a href="https://www.facebook.com/groups/239207996504834/" class="accent-button block text-center">Join Community</a>
-            </div>
-        </section>
+    <section>
+        <h2>🌴 NOMAD DESTINATION SPOTLIGHT</h2>
+        <div class="resource">
+            <h3>Chiang Mai, Thailand</h3>
+            <p><strong>Cost of Living:</strong> $1,000-$2,000/month</p>
+            <p><strong>Internet Speed:</strong> Average 100Mbps</p>
+            <p><strong>Highlights:</strong></p>
+            <ul>
+                <li>Thriving digital nomad community</li>
+                <li>Affordable luxury apartments</li>
+                <li>Amazing food scene</li>
+                <li>Modern coworking spaces</li>
+            </ul>
+            <a href="#" class="cta-button">Learn More About Chiang Mai</a>
+        </div>
+    </section>
 
-        <!-- Book of the Day -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">📖 Book of the Day</h2>
-            <div class="flex gap-6">
-                <div class="w-1/3">
-                    <img 
-                        src="https://m.media-amazon.com/images/I/41dT73LJ5iL._SY445_SX342_.jpg"
-                        alt="Newsletter Ninja Book Cover" 
-                        class="w-full rounded-lg shadow-lg"
-                    />
-                </div>
-                <div class="w-2/3">
-                    <h3 class="text-xl mb-2">Newsletter Ninja</h3>
-                    <p class="text-gray-400 mb-2">By Tammi Labrecque</p>
-                    <p class="mb-4">Are you struggling with email? Newsletter numbers getting you down? Fewer people opening your messages? No real reaction when you launch a book?
-        
-        There's another way—a better way.
-        
-        Imagine having a large list of happy readers who devoured every email you sent. Or launching a book and activating an army of fans who did the selling for you. You could be that person, with the help of Newsletter Ninja.</p>
-                    <a href="https://amzn.to/49aHEVg" class="accent-button inline-block">Learn More</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Video of the Day -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold mb-4">🎬 Video of the Day</h2>
-            <div class="relative aspect-video mb-4" id="video-container">
-                <!-- Thumbnail with play button -->
-                <img 
-                    src="https://img.youtube.com/vi/1ziSDBlK5lY/maxresdefault.jpg" 
-                    alt="Study with Me for 4 Hours" 
-                    class="w-full h-full object-cover rounded-lg"
-                />
-                <button 
-                    onclick="loadYouTubeVideo('1ziSDBlK5lY')" 
-                    class="absolute inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-all rounded-lg"
-                >
-                    <div class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-                        <span class="text-black text-4xl" style="margin-left: 4px;">▶</span>
-                    </div>
-                </button>
-            </div>
-            <h3 class="text-xl mb-2">Study with Me for 4 Hours</h3>
-            <p class="text-gray-400 mb-4">Spring of Yoo • 4:02:19</p>
-            <a href="https://youtu.be/1ziSDBlK5lY?si=yuGrFUxJY4IdgtAZ" class="accent-button inline-block">Watch on YouTube</a>
-        </section>
-        
-        <!-- COPY UNTIL HERE FOR NEW DAYS -->
-    </main>
-
-    <footer class="text-center py-8 text-gray-400">
-        <p>© 2024 Go Munster - Updated daily with fresh nomadic goodness</p>
+    <footer>
+        <p>Updated daily for aspiring and current digital nomads.</p>
+        <p>Built with ❤️ by a nomad, for nomads</p>
     </footer>
 
     <script>
-        function goToRandomDay() {
-            // Get list of archive days and redirect to a random one
-            // This will be implemented when we create the archive system
-            console.log('Random day feature coming soon!');
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         }
-    </script>
-    <script>
-        function loadYouTubeVideo(videoId) {
-        const container = document.getElementById('video-container');
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
-        iframe.setAttribute('title', 'YouTube video player');
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.classList.add('w-full', 'h-full', 'absolute', 'inset-0', 'rounded-lg');
-        container.innerHTML = '';
-        container.appendChild(iframe);
-    }
+
+        // Social sharing functionality
+        function shareOn(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Check out this awesome Digital Nomad resource!');
+            
+            const shareUrls = {
+                twitter: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`
+            };
+
+            window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+        }
+
+        // Check for saved theme preference
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
     </script>
 </body>
 </html>
