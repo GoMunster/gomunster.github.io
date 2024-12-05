@@ -331,29 +331,26 @@
 
     <section>
         <h2>🎧 PODCAST OF THE DAY</h2>
-        <!-- For Spotify Podcasts -->
-        <div class="media-container">
+        <div class="media-container" style="padding-bottom: 160px; /* Adjusted for podcast player height */">
             <iframe 
-                allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
+                src="https://embed.podcasts.apple.com/us/podcast/id1569923210?i=1000673280580" 
                 frameborder="0" 
-                height="175" 
-                style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" 
-                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                src="https://embed.podcasts.apple.com/us/podcast/how-to-work-with-your-adhd-to-boost-focus-and-productivity/id1569923210?i=1000673280580">
+                allowtransparency="true" 
+                allow="encrypted-media"
+                loading="lazy"
+                style="height: 160px;">
             </iframe>
         </div>
-            <h3>Marketing Made Simple</h3>
-             <p><strong>Episode:</strong> How to Work with Your ADHD to Boost Focus and Productivity</p>
-</section>
-
+        <p style="margin-top: 0;"><strong>Episode:</strong> Digital Nomad Success Stories</p>
+    </section>
+    
     <style>
         .media-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
             max-width: 100%;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem; /* Reduced margin */
             border-radius: 12px;
         }
         
