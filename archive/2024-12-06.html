@@ -312,37 +312,69 @@
         <p>Stop procrastinating on your side hustle. The best time to start was yesterday. The second best time is right fucking now.</p>
     </section>
 
-    <section>
+   <section>
         <h2>🎥 VIDEO OF THE DAY</h2>
         <div class="media-container">
-            <!-- Replace VIDEO_ID with your YouTube video ID -->
-            <iframe src="https://youtu.be/23OxV24mvuU?si=a6MdJOcLRvXRqZeZ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- For YouTube, you only need the video ID from the URL -->
+            <!-- For example, if your URL is https://www.youtube.com/watch?v=abc123xyz -->
+            <!-- Then your video ID is abc123xyz -->
+            <iframe 
+                src="https://www.youtube.com/embed/23OxV24mvuU" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
-        <h3>I Coded a Ramen Website from Scratch in 24 Hours!</h3>
-        <p>Life of Gaurz</p>
+        <p><strong>Today's Topic:</strong> How I Built a 6-Figure Business While Traveling</p>
     </section>
 
     <section>
         <h2>🎧 PODCAST OF THE DAY</h2>
-        <div class="media-container">
-            <!-- Replace PODCAST_URL with your podcast embed URL -->
-            <iframe src="https://podcasts.apple.com/us/podcast/how-to-work-with-your-adhd-to-boost-focus-and-productivity/id1569923210?i=1000673280580" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <div class="media-container" style="padding-bottom: 160px; /* Adjusted for podcast player height */">
+            <iframe 
+                src="https://embed.podcasts.apple.com/us/podcast/id1569923210?i=1000673280580" 
+                frameborder="0" 
+                allowtransparency="true" 
+                allow="encrypted-media"
+                loading="lazy"
+                style="height: 160px;">
+            </iframe>
         </div>
-        <h3>Marketing Made Simple</h3>
-        <p>How to Work with Your ADHD to Boost Focus and Productivity</p>
+        <p style="margin-top: 0;"><strong>Episode:</strong> Digital Nomad Success Stories</p>
     </section>
+    
+    <style>
+        .media-container {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 0.5rem; /* Reduced margin */
+            border-radius: 12px;
+        }
+        
+        .media-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+    </style>
 
     <section>
         <h2>📚 BOOK OF THE DAY</h2>
         <div class="book-container">
             <div class="book-image">
-                <img src="/api/placeholder/200/300" alt="Book cover" style="width: 100%; height: auto;">
+                <img src="https://m.media-amazon.com/images/I/71nrGP9Gk8L._SY425_.jpg" alt="Book cover" style="width: 100%; height: auto;">
             </div>
             <div class="book-details">
-                <h3>The 4-Hour Work Week</h3>
-                <p><strong>Author:</strong> Timothy Ferriss</p>
-                <p>Escape the 9-5, live anywhere, and join the new rich. The blueprint for digital nomad success.</p>
-                <a href="#" class="cta-button">Get it on Amazon</a>
+                <h3>1-Page Marketing Plan</h3>
+                <p><strong>Author:</strong> Allan Dib</p>
+                <p>In The 1-Page Marketing Plan, serial entrepreneur and rebellious marketer Allan Dib reveals a marketing implementation breakthrough that makes creating a marketing plan simple and fast. It’s literally a single page, divided up into nine squares. With it, you’ll be able to map out your own sophisticated marketing plan and go from zero to marketing hero.</p>
+                <a href="https://amzn.to/3ZmHsPn" class="cta-button">Get it on Amazon</a>
             </div>
         </div>
     </section>
